@@ -1,5 +1,0 @@
-dependencies {
-	compile project(':persona-integration:persona-client')
-	compile project(':persona-model:persona-model-api')
-	compile project(':persona-model:persona-model-jpa')	
-}
