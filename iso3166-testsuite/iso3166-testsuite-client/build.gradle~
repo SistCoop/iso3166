@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':persona-integration:persona-client')
+	compile project(':persona-services')   	   
+}
+
