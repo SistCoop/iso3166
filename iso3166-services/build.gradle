@@ -1,5 +1,0 @@
-dependencies {
-	compile project(':iso3166-integration:iso3166-client')
-	compile project(':iso3166-model:iso3166-model-api')
-	compile project(':iso3166-model:iso3166-model-jpa')	
-}

@@ -1,3 +1,0 @@
-dependencies {
-	compile project(':iso3166-model:iso3166-model-api')
-}

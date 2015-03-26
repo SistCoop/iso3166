@@ -1,5 +1,0 @@
-dependencies {
-    compile project(':iso3166-integration:iso3166-client')
-	compile project(':iso3166-services')   	   
-}
-
