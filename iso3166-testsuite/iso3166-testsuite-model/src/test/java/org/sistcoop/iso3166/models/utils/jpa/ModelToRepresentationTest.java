@@ -67,7 +67,7 @@ public class ModelToRepresentationTest {
 				
 				.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-				.addAsWebInfResource("test-ds.xml");
+				.addAsWebInfResource("jpaTest-ds.xml");
 
 		war.addAsLibraries(dependencies);
 
