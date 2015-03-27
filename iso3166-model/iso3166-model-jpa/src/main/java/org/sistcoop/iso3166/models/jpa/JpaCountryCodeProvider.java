@@ -44,7 +44,7 @@ public class JpaCountryCodeProvider implements CountryCodeProvider {
 		entity.setShortNameEn(shortNameEn);
 		entity.setShortNameUppercaseEn(shortNameUppercaseEn);
 		entity.setFullNameEn(fullNameEn);
-		entity = em.merge(entity);
+		em.persist(entity);
 		return new CountryCodeAdapter(em, entity);
 	}
 
