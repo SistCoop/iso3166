@@ -44,15 +44,16 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 		entity.setShortNameEn(shortNameEn);
 		entity.setShortNameUppercaseEn(shortNameUppercaseEn);
 		entity.setFullNameEn(fullNameEn);
-		em.merge(entity);
+		em.persist(entity);
 		return new CountryCodeAdapter(em, entity);
 	}
 
 	@Override
-	public boolean removeCountryCode(CountryCodeModel countryCodeModel) {
-		CountryCodeEntity countryCodeEntity = CountryCodeAdapter.toCountryCodeEntity(countryCodeModel, em);
-		em.remove(countryCodeEntity);
-		return true;
+	public boolean removeCountryCode(CountryCodeModel countryCodeModel) {			
+		CountryCodeEntity countryCodeEntity = em.find(CountryCodeEntity.class, countryCodeModel.getId());
+        if (countryCodeEntity == null) return false;
+        em.remove(countryCodeEntity);
+        return true;      
 	}
 
 	@Override
