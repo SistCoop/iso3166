@@ -16,13 +16,16 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.CountryCodeProvider;
+import org.sistcoop.iso3166.models.mongo.MongoCountryCodeProvider;
 import org.sistcoop.iso3166.models.mongo.entities.CountryCodeEntity;
+import org.sistcoop.iso3166.models.mongo.CountryCodeAdapter;
 import org.sistcoop.iso3166.provider.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,15 +53,17 @@ public class CountryCodeProviderTest {
 
 				.addPackage(CountryCodeModel.class.getPackage())
 
-				/** persona-model-jpa **/
+				/** persona-model-mongo **/
 				.addClass(MongoCountryCodeProvider.class)
 				.addClass(CountryCodeAdapter.class)
 
 				.addPackage(CountryCodeEntity.class.getPackage())
 
-				.addAsResource("META-INF/jpaTest-persistence.xml", "META-INF/persistence.xml")
+				.addAsResource("META-INF/mongoTest-persistence.xml", "META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-				.addAsWebInfResource("jpaTest-ds.xml");
+				.addAsResource( new StringAsset(
+					"Dependencies: org.hibernate:ogm services, org.hibernate.ogm.mongodb services" ),
+					"META-INF/MANIFEST.MF");
 
 		war.addAsLibraries(dependencies);
 
