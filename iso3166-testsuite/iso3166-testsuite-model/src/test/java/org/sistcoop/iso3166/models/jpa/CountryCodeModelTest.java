@@ -66,7 +66,7 @@ public class CountryCodeModelTest {
 				
 				.addPackage(CountryCodeEntity.class.getPackage())
 				
-				.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
+				.addAsResource("META-INF/jpaTest-persistence.xml", "META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
 				.addAsWebInfResource("jpaTest-ds.xml");
 
