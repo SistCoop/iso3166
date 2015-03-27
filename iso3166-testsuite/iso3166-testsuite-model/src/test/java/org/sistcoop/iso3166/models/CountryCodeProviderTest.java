@@ -1,8 +1,8 @@
 package org.sistcoop.iso3166.models;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -155,7 +155,7 @@ public class CountryCodeProviderTest {
 		assertThat(models.size(), is(1));
 	}
 
-	/*@Test
+	@Test
 	public void removeCountryCode() {
 		CountryCodeModel model1 = countryCodeProvider.addCountryCode("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
 		
@@ -166,6 +166,6 @@ public class CountryCodeProviderTest {
 
 		assertThat(result, is(true));
 		assertThat(model2, is(nullValue()));
-	}*/
+	}
 
 }
