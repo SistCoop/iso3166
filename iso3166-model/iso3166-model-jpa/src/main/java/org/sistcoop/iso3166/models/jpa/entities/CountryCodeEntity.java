@@ -32,7 +32,7 @@ public class CountryCodeEntity implements Serializable {
 
 	public final static String base = "org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity.";
 	public final static String findAll = base + "findAll";
-	public final static String findByAlpha2Code = base + "findAll";
+	public final static String findByAlpha2Code = base + "findByAlpha2Code";
 	public final static String findByAlpha3Code = base + "findByAlpha3Code";
 	public final static String findByNumericCode = base + "findByNumericCode";
 	public final static String findByFilterText = base + "findByFilterText";
@@ -50,6 +50,10 @@ public class CountryCodeEntity implements Serializable {
 	private String shortNameUppercaseEn;
 	private String fullNameEn;
 
+	public CountryCodeEntity() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Id
 	@GeneratedValue(generator = "SgGenericGenerator")
 	public Integer getId() {
@@ -144,6 +148,46 @@ public class CountryCodeEntity implements Serializable {
 
 	public void setFullNameEn(String fullNameEn) {
 		this.fullNameEn = fullNameEn;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((alpha2Code == null) ? 0 : alpha2Code.hashCode());
+		result = prime * result
+				+ ((alpha3Code == null) ? 0 : alpha3Code.hashCode());
+		result = prime * result
+				+ ((numericCode == null) ? 0 : numericCode.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CountryCodeEntity other = (CountryCodeEntity) obj;
+		if (alpha2Code == null) {
+			if (other.alpha2Code != null)
+				return false;
+		} else if (!alpha2Code.equals(other.alpha2Code))
+			return false;
+		if (alpha3Code == null) {
+			if (other.alpha3Code != null)
+				return false;
+		} else if (!alpha3Code.equals(other.alpha3Code))
+			return false;
+		if (numericCode == null) {
+			if (other.numericCode != null)
+				return false;
+		} else if (!numericCode.equals(other.numericCode))
+			return false;
+		return true;
 	}
 
 }

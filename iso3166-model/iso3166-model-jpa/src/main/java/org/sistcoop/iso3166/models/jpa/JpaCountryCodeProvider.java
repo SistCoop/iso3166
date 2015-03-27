@@ -49,9 +49,14 @@ public class JpaCountryCodeProvider implements CountryCodeProvider {
 	}
 
 	@Override
-	public boolean removePersonaNatural(CountryCodeModel countryCodeModel) {
-		CountryCodeEntity countryCodeEntity = CountryCodeAdapter.toCountryCodeEntity(countryCodeModel, em);
-		em.remove(countryCodeEntity);
+	public boolean removeCountryCode(CountryCodeModel countryCodeModel) {	
+		CountryCodeEntity countryCodeEntity = CountryCodeAdapter.toCountryCodeEntity(countryCodeModel, em);			
+		if (em.contains(countryCodeEntity)){
+			em.remove(countryCodeEntity);	
+		}			
+		else {			
+			em.remove(em.getReference(CountryCodeEntity.class, countryCodeEntity.getId()));			
+		}										
 		return true;
 	}
 

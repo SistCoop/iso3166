@@ -92,7 +92,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 	@Override
 	public void removeByAlpha2Code(String alpha2Code) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha2Code(alpha2Code);
-		boolean result = countryCodeProvider.removePersonaNatural(model);
+		boolean result = countryCodeProvider.removeCountryCode(model);
 		if(!result)
 			throw new InternalServerErrorException();
 	}
@@ -100,7 +100,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 	@Override
 	public void removeByAlpha3Code(String alpha3Code) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha3Code(alpha3Code);
-		boolean result = countryCodeProvider.removePersonaNatural(model);
+		boolean result = countryCodeProvider.removeCountryCode(model);
 		if(!result)
 			throw new InternalServerErrorException();
 	}
@@ -108,7 +108,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 	@Override
 	public void removeByNumericCode(String numericCode) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByNumericCode(numericCode);
-		boolean result = countryCodeProvider.removePersonaNatural(model);
+		boolean result = countryCodeProvider.removeCountryCode(model);
 		if(!result)
 			throw new InternalServerErrorException();
 	}

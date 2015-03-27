@@ -15,21 +15,20 @@ public class CountryCodeAdapter implements CountryCodeModel {
 	protected CountryCodeEntity countryCodeEntity;
 	protected EntityManager em;
 
-	public CountryCodeAdapter(EntityManager em,
-			CountryCodeEntity countryCodeEntity) {
+	public CountryCodeAdapter(EntityManager em, CountryCodeEntity countryCodeEntity) {
 		this.em = em;
 		this.countryCodeEntity = countryCodeEntity;
 	}
 
-	public CountryCodeEntity getCountryCodeEntity() {
+	public CountryCodeEntity getCountryCodeEntity() {		
 		return this.countryCodeEntity;
 	}
 
-	public static CountryCodeEntity toCountryCodeEntity(CountryCodeModel model, EntityManager em) {
+	public static CountryCodeEntity toCountryCodeEntity(CountryCodeModel model, EntityManager em) {			
 		if (model instanceof CountryCodeAdapter) {
 			return ((CountryCodeAdapter) model).getCountryCodeEntity();
 		}
-		return em.getReference(CountryCodeEntity.class, model.getId());
+		return em.getReference(CountryCodeEntity.class, model.getId());						
 	}
 
 	@Override
@@ -107,4 +106,45 @@ public class CountryCodeAdapter implements CountryCodeModel {
 		countryCodeEntity.setFullNameEn(fullNameEn);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((getAlpha2Code() == null) ? 0 : getAlpha2Code().hashCode());
+		result = prime * result
+				+ ((getAlpha3Code() == null) ? 0 : getAlpha3Code().hashCode());
+		result = prime * result
+				+ ((getNumericCode() == null) ? 0 : getNumericCode().hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if(!(obj instanceof CountryCodeModel))
+			return false;
+		
+		CountryCodeModel other = (CountryCodeModel) obj;
+		if (getAlpha2Code() == null) {
+			if (other.getAlpha2Code() != null)
+				return false;
+		} else if (!getAlpha2Code().equals(other.getAlpha2Code()))
+			return false;
+		if (getAlpha3Code() == null) {
+			if (other.getAlpha3Code() != null)
+				return false;
+		} else if (!getAlpha3Code().equals(other.getAlpha3Code()))
+			return false;
+		if (getNumericCode() == null) {
+			if (other.getNumericCode() != null)
+				return false;
+		} else if (!getNumericCode().equals(other.getNumericCode()))
+			return false;
+		return true;
+	}
+	
 }

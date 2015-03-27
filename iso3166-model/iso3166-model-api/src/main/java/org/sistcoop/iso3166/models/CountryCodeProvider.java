@@ -19,7 +19,7 @@ public interface CountryCodeProvider extends Provider {
 		    String shortNameUppercaseEn, 
 		    String fullNameEn);
 		
-	boolean removePersonaNatural(CountryCodeModel countryCodeModel);
+	boolean removeCountryCode(CountryCodeModel countryCodeModel);
 
 	CountryCodeModel getCountryCodeByAlpha2Code(String  alpha2Code);
 	

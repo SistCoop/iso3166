@@ -49,7 +49,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 	}
 
 	@Override
-	public boolean removePersonaNatural(CountryCodeModel countryCodeModel) {
+	public boolean removeCountryCode(CountryCodeModel countryCodeModel) {
 		CountryCodeEntity countryCodeEntity = CountryCodeAdapter.toCountryCodeEntity(countryCodeModel, em);
 		em.remove(countryCodeEntity);
 		return true;
