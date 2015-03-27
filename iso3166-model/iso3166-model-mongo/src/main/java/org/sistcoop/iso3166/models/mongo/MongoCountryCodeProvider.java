@@ -1,4 +1,4 @@
-package org.sistcoop.persona.models.mongo;
+package org.sistcoop.iso3166.models.mongo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import javax.persistence.TypedQuery;
 
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.CountryCodeProvider;
-import org.sistcoop.persona.models.mongo.entities.CountryCodeEntity;
+import org.sistcoop.iso3166.models.mongo.entities.CountryCodeEntity;
 
 @Named
 @Stateless

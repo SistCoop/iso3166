@@ -15,7 +15,7 @@
 						@Parameter(name = "optimizer ", value = "pooled") }) 
 				}
 		)
-package org.sistcoop.persona.models.mongo.entities;
+package org.sistcoop.iso3166.models.mongo.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.GenericGenerators;

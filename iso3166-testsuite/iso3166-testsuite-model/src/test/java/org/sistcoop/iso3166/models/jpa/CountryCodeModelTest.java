@@ -1,4 +1,4 @@
-package org.sistcoop.iso3166.models;
+package org.sistcoop.iso3166.models.jpa;
 
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -23,6 +23,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sistcoop.iso3166.models.CountryCodeModel;
+import org.sistcoop.iso3166.models.CountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.CountryCodeAdapter;
 import org.sistcoop.iso3166.models.jpa.JpaCountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;

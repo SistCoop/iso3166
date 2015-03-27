@@ -1,4 +1,4 @@
-package org.sistcoop.iso3166.models;
+package org.sistcoop.iso3166.models.mongo;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -20,9 +20,9 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.sistcoop.iso3166.models.jpa.CountryCodeAdapter;
-import org.sistcoop.iso3166.models.jpa.JpaCountryCodeProvider;
-import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
+import org.sistcoop.iso3166.models.CountryCodeModel;
+import org.sistcoop.iso3166.models.CountryCodeProvider;
+import org.sistcoop.iso3166.models.mongo.entities.CountryCodeEntity;
 import org.sistcoop.iso3166.provider.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class CountryCodeProviderTest {
 				.addPackage(CountryCodeModel.class.getPackage())
 
 				/** persona-model-jpa **/
-				.addClass(JpaCountryCodeProvider.class)
+				.addClass(MongoCountryCodeProvider.class)
 				.addClass(CountryCodeAdapter.class)
 
 				.addPackage(CountryCodeEntity.class.getPackage())

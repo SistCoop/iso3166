@@ -1,4 +1,4 @@
-package org.sistcoop.persona.models.mongo.entities;
+package org.sistcoop.iso3166.models.mongo.entities;
 
 import java.io.Serializable;
 
