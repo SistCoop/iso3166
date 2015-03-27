@@ -8,10 +8,19 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name = CountryCodeEntity.findAll, query = "SELECT c FROM CountryCodeEntity c"), 
+	@NamedQuery(name = CountryCodeEntity.findByAlpha2Code, query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha2Code = :alpha2Code"),
+	@NamedQuery(name = CountryCodeEntity.findByAlpha3Code, query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha3Code = :alpha3Code"),
+	@NamedQuery(name = CountryCodeEntity.findByNumericCode, query = "SELECT c FROM CountryCodeEntity c WHERE c.numericCode = :numericCode"),
+	@NamedQuery(name = CountryCodeEntity.findByFilterText, query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha2Code LIKE :filterText OR c.alpha3Code LIKE :filterText OR c.numericCode LIKE :filterText OR c.shortNameEn LIKE :filterText OR c.shortNameUppercaseEn LIKE :filterText OR c.fullNameEn LIKE :filterText"),	
+	@NamedQuery(name = CountryCodeEntity.count, query = "select count(u) from CountryCodeEntity u") })
 public class CountryCodeEntity implements Serializable {
 
 	/**
@@ -19,9 +28,9 @@ public class CountryCodeEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public final static String base = "org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity.";
+	public final static String base = "org.sistcoop.iso3166.models.mongo.entities.CountryCodeEntity.";
 	public final static String findAll = base + "findAll";
-	public final static String findByAlpha2Code = base + "findAll";
+	public final static String findByAlpha2Code = base + "findByAlpha2Code";
 	public final static String findByAlpha3Code = base + "findByAlpha3Code";
 	public final static String findByNumericCode = base + "findByNumericCode";
 	public final static String findByFilterText = base + "findByFilterText";
