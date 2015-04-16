@@ -8,19 +8,19 @@ Es un paquete que permite administrar datos de países segun el estandar iso3166
 * CountryCodeResource ("/countryCodes")
 
 
-| Method        | URL                                               | Descripcion                                   |
-| ------------- |:-------------------------------------------------:| ---------------------------------------------:|
-| GET           | "/countryCodes/alpha2Code/{alpha2Code}"           | busca un CountryCode segun alpha2Code         |
-| GET           | "/countryCodes/alpha2Code/{alpha3Code}"           | busca un CountryCode segun alpha3Code         |
-| GET           | "/countryCodes/alpha2Code/{numericCode}"          | busca un CountryCode segun numericCode        |
-| POST          | "/countryCodes"                                   | crea un CountryCode segun el objeto añadido   |
-| PUT           | "/countryCodes/alpha2Code/{alpha2Code}"           | Actualiza segun alpha2Code                    |
-| PUT           | "/countryCodes/alpha3Code/{alpha3Code}"           | Actualiza segun alpha3Code                    |
-| PUT           | "/countryCodes/alpha2Code/{numericCode}"          | Actualiza segun numericCode                   |
-| DELETE        | "/countryCodes/alpha2Code/{alpha2Code}"           | elimina un CountryCode segun alpha2Code       |
-| DELETE        | "/countryCodes/alpha2Code/{alpha3Code}"           | elimina un CountryCode segun alpha3Code       |
-| DELETE        | "/countryCodes/alpha2Code/{numericCode}"          | elimina un CountryCode segun numericCode      |
-| GET           | "/countryCodes?filterText&firstResult&maxResults" | Busca segun los parametros enviados           |
+| Method        | URL                                               | Descripcion                       |
+| :------------ |:--------------------------------------------------|:---------------------------------|
+| GET           | "/countryCodes/alpha2Code/{alpha2Code}"           | Busca uno segun alpha2Code        |
+| GET           | "/countryCodes/alpha2Code/{alpha3Code}"           | Busca uno segun alpha3Code        |
+| GET           | "/countryCodes/alpha2Code/{numericCode}"          | Busca uno segun numericCode       |
+| POST          | "/countryCodes"                                   | Crea uno                          |
+| PUT           | "/countryCodes/alpha2Code/{alpha2Code}"           | Actualiza uno segun alpha2Code    |
+| PUT           | "/countryCodes/alpha3Code/{alpha3Code}"           | Actualiza uno segun alpha3Code    |
+| PUT           | "/countryCodes/alpha2Code/{numericCode}"          | Actualiza uno segun numericCode   |
+| DELETE        | "/countryCodes/alpha2Code/{alpha2Code}"           | Elimina uno segun alpha2Code      |
+| DELETE        | "/countryCodes/alpha2Code/{alpha3Code}"           | Elimina uno segun alpha3Code      |
+| DELETE        | "/countryCodes/alpha2Code/{numericCode}"          | Elimina uno segun numericCode     |
+| GET           | "/countryCodes?filterText&firstResult&maxResults" | Busca segun parametros            |
 
 
 Los objetos countryCodes tienen la siguiente estructura:
