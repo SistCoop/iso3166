@@ -27,23 +27,15 @@ Los objetos countryCodes tienen la siguiente estructura:
 
 ```json
 "countryCode": {
-   alpha2Code: String,
-   alpha3Code: String,
-   numericCode: String,    
-   independent: Boolean,
-   status: String,  
-   shortNameEn: String,
-   shortNameUppercaseEn: String,
-   fullNameEn: String
+   "alpha2Code": "String",
+   "alpha3Code": "String",
+   "numericCode": "String",    
+   "independent": "Boolean",
+   "status": "String",  
+   "shortNameEn": "String",
+   "shortNameUppercaseEn": "String",
+   "fullNameEn": "String"
 }
-```
-
-```json
-"authors": [
-  { "name": "John Doe" },
-  { "name": "John Doe", "email": "john@doe.com" },
-  { "name": "John Doe", "email": "john@doe.com", "homepage": "http://johndoe.com" }
-]
 ```
 
 ### Version
