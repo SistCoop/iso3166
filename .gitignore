@@ -36,4 +36,5 @@
 *.sublime-*
 .nb-gradle
 test-output/
+.idea/
 
