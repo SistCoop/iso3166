@@ -48,3 +48,8 @@ Dependences:
 * [JavaEE] - javaEE
 
 Este proyecto es mantenido por SistCoop S.A.C.
+
+License
+----
+
+MIT
