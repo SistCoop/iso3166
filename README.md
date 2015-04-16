@@ -26,7 +26,7 @@ Es un paquete que permite administrar datos de países segun el estandar iso3166
 Los objetos countryCodes tienen la siguiente estructura:
 
 ```json
-{
+"countryCode": {
    alpha2Code: String,
    alpha3Code: String,
    numericCode: String,    
@@ -36,6 +36,14 @@ Los objetos countryCodes tienen la siguiente estructura:
    shortNameUppercaseEn: String,
    fullNameEn: String
 }
+```
+
+```json
+"authors": [
+  { "name": "John Doe" },
+  { "name": "John Doe", "email": "john@doe.com" },
+  { "name": "John Doe", "email": "john@doe.com", "homepage": "http://johndoe.com" }
+]
 ```
 
 ### Version
