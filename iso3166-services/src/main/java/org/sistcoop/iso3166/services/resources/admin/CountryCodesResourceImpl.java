@@ -3,6 +3,7 @@ package org.sistcoop.iso3166.services.resources.admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.InternalServerErrorException;
@@ -10,6 +11,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.jboss.ejb3.annotation.SecurityDomain;
+import org.sistcoop.iso3166.admin.client.Roles;
 import org.sistcoop.iso3166.admin.client.resource.CountryCodesResource;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.CountryCodeProvider;
@@ -18,6 +21,7 @@ import org.sistcoop.iso3166.models.utils.RepresentationToModel;
 import org.sistcoop.iso3166.representations.idm.CountryCodeRepresentation;
 
 @Stateless
+@SecurityDomain("keycloak")
 public class CountryCodesResourceImpl implements CountryCodesResource {
 
 	@Inject
@@ -29,30 +33,35 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 	@Context
 	private UriInfo uriInfo;
 	
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public CountryCodeRepresentation findByAlpha2Code(String alpha2Code) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha2Code(alpha2Code);		
 		return ModelToRepresentation.toRepresentation(model);
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public CountryCodeRepresentation findByAlpha3Code(String alpha3Code) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha3Code(alpha3Code);		
 		return ModelToRepresentation.toRepresentation(model);
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public CountryCodeRepresentation findByNumericCode(String numericCode) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByNumericCode(numericCode);		
 		return ModelToRepresentation.toRepresentation(model);
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public Response create(CountryCodeRepresentation countryCodeRepresentation) {
 		CountryCodeModel model = representationToModel.createCountryCode(countryCodeRepresentation, countryCodeProvider);
 		return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId().toString()).build()).header("Access-Control-Expose-Headers", "Location").entity(model.getId()).build();
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public void updateByAlpha2Code(String alpha2Code, CountryCodeRepresentation countryCodeRepresentation) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha2Code(alpha2Code);
@@ -65,6 +74,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 		model.commit();		
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public void updateByAlpha3Code(String alpha3Code, CountryCodeRepresentation countryCodeRepresentation) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha3Code(alpha3Code);
@@ -77,6 +87,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 		model.commit();
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public void updateByNumericCode(String numericCode, CountryCodeRepresentation countryCodeRepresentation) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByNumericCode(numericCode);
@@ -89,6 +100,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 		model.commit();
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public void removeByAlpha2Code(String alpha2Code) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha2Code(alpha2Code);
@@ -97,6 +109,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 			throw new InternalServerErrorException();
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public void removeByAlpha3Code(String alpha3Code) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByAlpha3Code(alpha3Code);
@@ -105,6 +118,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 			throw new InternalServerErrorException();
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public void removeByNumericCode(String numericCode) {
 		CountryCodeModel model = countryCodeProvider.getCountryCodeByNumericCode(numericCode);
@@ -113,6 +127,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 			throw new InternalServerErrorException();
 	}
 
+	@RolesAllowed(Roles.ver_countries)
 	@Override
 	public List<CountryCodeRepresentation> listAll(String filterText, Integer firstResult, Integer maxResults) {
 		List<CountryCodeRepresentation> results = new ArrayList<CountryCodeRepresentation>();
@@ -136,6 +151,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 		return results;
 	}
 
+	
 	@Override
 	public int countAll() {
 		int count = countryCodeProvider.getCountryCodesCount();
