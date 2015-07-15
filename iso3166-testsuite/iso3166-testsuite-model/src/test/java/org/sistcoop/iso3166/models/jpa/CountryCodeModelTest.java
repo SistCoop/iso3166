@@ -77,7 +77,7 @@ public class CountryCodeModelTest {
 	
 	@Test
 	public void commit() {
-		CountryCodeModel model1 = countryCodeProvider.addCountryCode("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");				
+		CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");				
 		
 		String alpha2Code = model1.getAlpha2Code();
 		String newShortNameEn = "peru arriba";
@@ -87,7 +87,7 @@ public class CountryCodeModelTest {
 		model1.setShortNameUppercaseEn(newShortNameUppercaseEn);
 		model1.commit();	
 
-		CountryCodeModel model2 = countryCodeProvider.getCountryCodeByAlpha2Code(alpha2Code);;
+		CountryCodeModel model2 = countryCodeProvider.findByAlpha2Code(alpha2Code);;
 				
 		assertThat(model2.getShortNameEn(), is(equalTo(newShortNameEn)));
 		assertThat(model2.getShortNameUppercaseEn(), is(equalTo(newShortNameUppercaseEn)));
@@ -95,7 +95,7 @@ public class CountryCodeModelTest {
 
 	@Test
 	public void testAttributes() {
-		CountryCodeModel model = countryCodeProvider.addCountryCode("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");						
+		CountryCodeModel model = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");						
 		
 		assertThat(model.getId(), is(notNullValue()));
 		assertThat(model.getAlpha2Code(), is(notNullValue()));

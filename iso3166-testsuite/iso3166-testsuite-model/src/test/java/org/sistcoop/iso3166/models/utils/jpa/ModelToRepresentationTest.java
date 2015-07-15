@@ -76,7 +76,7 @@ public class ModelToRepresentationTest {
 	
 	@Test
 	public void commit() {
-		CountryCodeModel model1 = countryCodeProvider.addCountryCode("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");				
+		CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");				
 		
 		CountryCodeRepresentation countryCodeRepresentation = ModelToRepresentation.toRepresentation(model1);
 				

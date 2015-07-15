@@ -16,7 +16,7 @@ public class RepresentationToModel {
 			CountryCodeRepresentation rep, 		
 			CountryCodeProvider countryCodeProvider) {		
 
-		CountryCodeModel model = countryCodeProvider.addCountryCode(
+		CountryCodeModel model = countryCodeProvider.create(
 				rep.getAlpha2Code(), 
 				rep.getAlpha3Code(), 
 				rep.getNumericCode(), 

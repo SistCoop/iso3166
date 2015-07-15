@@ -1,40 +1,29 @@
 package org.sistcoop.iso3166.models;
 
-import java.util.List;
-
 import javax.ejb.Local;
 
+import org.sistcoop.iso3166.models.search.SearchCriteriaModel;
+import org.sistcoop.iso3166.models.search.SearchResultsModel;
 import org.sistcoop.iso3166.provider.Provider;
 
 @Local
 public interface CountryCodeProvider extends Provider {
 
-	CountryCodeModel addCountryCode(
-			String alpha2Code,
-			String alpha3Code,
-			String numericCode,
-		    boolean independent,
-		    boolean status,
-		    String shortNameEn, 
-		    String shortNameUppercaseEn, 
-		    String fullNameEn);
-		
-	boolean removeCountryCode(CountryCodeModel countryCodeModel);
+    CountryCodeModel create(String alpha2Code, String alpha3Code, String numericCode, boolean independent,
+            boolean status, String shortNameEn, String shortNameUppercaseEn, String fullNameEn);
 
-	CountryCodeModel getCountryCodeByAlpha2Code(String  alpha2Code);
-	
-	CountryCodeModel getCountryCodeByAlpha3Code(String  alpha3Code);
-	
-	CountryCodeModel getCountryCodeByNumericCode(String  numericCode);
-	
-	int getCountryCodesCount();
-	
-	List<CountryCodeModel> getCountryCodes();	
+    boolean remove(CountryCodeModel countryCodeModel);
 
-	List<CountryCodeModel> getCountryCodes(String filterText);
-	
-	List<CountryCodeModel> getCountryCodes(int firstResult, int maxResults);		
+    CountryCodeModel findByAlpha2Code(String alpha2Code);
 
-	List<CountryCodeModel> getCountryCodes(String filterText, int firstResult, int maxResults);
+    CountryCodeModel findByAlpha3Code(String alpha3Code);
+
+    CountryCodeModel findByNumericCode(String numericCode);
+
+    SearchResultsModel<CountryCodeModel> search();
+
+    SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria);
+
+    SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria, String filterText);
 
 }

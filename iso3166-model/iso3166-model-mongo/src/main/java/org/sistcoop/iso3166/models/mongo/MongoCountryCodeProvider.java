@@ -31,7 +31,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 	}
 
 	@Override
-	public CountryCodeModel addCountryCode(String alpha2Code,
+	public CountryCodeModel create(String alpha2Code,
 			String alpha3Code, String numericCode, boolean independent,
 			boolean status, String shortNameEn, String shortNameUppercaseEn,
 			String fullNameEn) {
@@ -49,7 +49,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 	}
 
 	@Override
-	public boolean removeCountryCode(CountryCodeModel countryCodeModel) {			
+	public boolean remove(CountryCodeModel countryCodeModel) {			
 		CountryCodeEntity countryCodeEntity = em.find(CountryCodeEntity.class, countryCodeModel.getId());
         if (countryCodeEntity == null) return false;
         em.remove(countryCodeEntity);
@@ -57,7 +57,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 	}
 
 	@Override
-	public CountryCodeModel getCountryCodeByAlpha2Code(String alpha2Code) {
+	public CountryCodeModel findByAlpha2Code(String alpha2Code) {
 		TypedQuery<CountryCodeEntity> query = em.createNamedQuery(CountryCodeEntity.findByAlpha2Code, CountryCodeEntity.class);
 		query.setParameter("alpha2Code", alpha2Code);		
 		List<CountryCodeEntity> results = query.getResultList();
@@ -67,7 +67,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 	}
 
 	@Override
-	public CountryCodeModel getCountryCodeByAlpha3Code(String alpha3Code) {
+	public CountryCodeModel findByAlpha3Code(String alpha3Code) {
 		TypedQuery<CountryCodeEntity> query = em.createNamedQuery(CountryCodeEntity.findByAlpha3Code, CountryCodeEntity.class);
 		query.setParameter("alpha3Code", alpha3Code);		
 		List<CountryCodeEntity> results = query.getResultList();
@@ -77,7 +77,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 	}
 
 	@Override
-	public CountryCodeModel getCountryCodeByNumericCode(String numericCode) {
+	public CountryCodeModel findByNumericCode(String numericCode) {
 		TypedQuery<CountryCodeEntity> query = em.createNamedQuery(CountryCodeEntity.findByNumericCode, CountryCodeEntity.class);
 		query.setParameter("numericCode", numericCode);		
 		List<CountryCodeEntity> results = query.getResultList();
