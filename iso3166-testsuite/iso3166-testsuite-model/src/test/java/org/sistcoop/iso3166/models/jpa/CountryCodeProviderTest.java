@@ -1,168 +1,115 @@
 package org.sistcoop.iso3166.models.jpa;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
-
-import java.io.File;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import javax.inject.Inject;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.persistence.UsingDataSet;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.CountryCodeProvider;
-import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
-import org.sistcoop.iso3166.provider.Provider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-@RunWith(Arquillian.class)
-@UsingDataSet("empty.xml")
-public class CountryCodeProviderTest {
+public class CountryCodeProviderTest extends AbstractTest {
 
-	Logger log = LoggerFactory.getLogger(CountryCodeProviderTest.class);
+    @Inject
+    private CountryCodeProvider countryCodeProvider;
 
-	@Inject
-	private CountryCodeProvider countryCodeProvider;
+    @Test
+    public void addCountryCode() {
+        CountryCodeModel model = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
+                "Republic of Peru");
 
-	@Deployment
-	public static WebArchive createDeployment() {
-		File[] dependencies = Maven.resolver()
-				.resolve("org.slf4j:slf4j-simple:1.7.10").withoutTransitivity()
-				.asFile();
+        assertThat(model, is(notNullValue()));
+        assertThat(model.getId(), is(notNullValue()));
+    }
 
-		WebArchive war = ShrinkWrap
-				.create(WebArchive.class, "test.war")
-				/** persona-model-api **/
-				.addClass(Provider.class)
-				.addClass(CountryCodeProvider.class)
+    @Test
+    public void getCountryCodeByAlpha2Code() {
+        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
+                "Republic of Peru");
 
-				.addPackage(CountryCodeModel.class.getPackage())
+        String alpha2Code = model1.getAlpha2Code();
 
-				/** persona-model-jpa **/
-				.addClass(JpaCountryCodeProvider.class)
-				.addClass(CountryCodeAdapter.class)
+        CountryCodeModel model2 = countryCodeProvider.findByAlpha2Code(alpha2Code);
 
-				.addPackage(CountryCodeEntity.class.getPackage())
+        assertThat(model1, is(equalTo(model2)));
+    }
 
-				.addAsResource("META-INF/jpaTest-persistence.xml", "META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-				.addAsWebInfResource("jpaTest-ds.xml");
+    @Test
+    public void getCountryCodeByAlpha3Code() {
+        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
+                "Republic of Peru");
 
-		war.addAsLibraries(dependencies);
+        String alpha3Code = model1.getAlpha3Code();
 
-		return war;
-	}
+        CountryCodeModel model2 = countryCodeProvider.findByAlpha3Code(alpha3Code);
 
-	@Test
-	public void addCountryCode() {
-		CountryCodeModel model = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
+        assertThat(model1, is(equalTo(model2)));
+    }
 
-		assertThat(model, is(notNullValue()));
-		assertThat(model.getId(), is(notNullValue()));
-	}
+    @Test
+    public void getCountryCodeByNumericCode() {
+        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
+                "Republic of Peru");
 
-	@Test
-	public void getCountryCodeByAlpha2Code() {
-		CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");		
-		
-		String alpha2Code = model1.getAlpha2Code();
-		
-		CountryCodeModel model2 = countryCodeProvider.findByAlpha2Code(alpha2Code);
+        String numericCode = model1.getNumericCode();
 
-		assertThat(model1, is(equalTo(model2)));
-	}
+        CountryCodeModel model2 = countryCodeProvider.findByNumericCode(numericCode);
 
-	@Test
-	public void getCountryCodeByAlpha3Code() {
-		CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");		
-		
-		String alpha3Code = model1.getAlpha3Code();
-		
-		CountryCodeModel model2 = countryCodeProvider.findByAlpha3Code(alpha3Code);
+        assertThat(model1, is(equalTo(model2)));
+    }
 
-		assertThat(model1, is(equalTo(model2)));
-	}
-	
-	@Test
-	public void getCountryCodeByNumericCode() {
-		CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");		
-		
-		String numericCode = model1.getNumericCode();
-		
-		CountryCodeModel model2 = countryCodeProvider.findByNumericCode(numericCode);
-
-		assertThat(model1, is(equalTo(model2)));
-	}
-		
-	/*@Test
-	public void getCountryCodes() {
-		countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
-		
-		List<CountryCodeModel> models = countryCodeProvider.getCountryCodes();
-		for (CountryCodeModel model : models) {
-			assertThat(model, is(notNullValue()));
-		}
-
-		assertThat(models.size(), is(1));
-	}
-
-	@Test
-	public void getCountryCodesFirstResulAndLimit() {
-		countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
-				
-		List<CountryCodeModel> models = countryCodeProvider.getCountryCodes(0, 10);
-		for (CountryCodeModel model : models) {
-			assertThat(model, is(notNullValue()));
-		}
-
-		assertThat(models.size(), is(1));
-	}
-
-	@Test
-	public void getCountryCodesForFilterText() {
-		countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
-		
-		List<CountryCodeModel> models = countryCodeProvider.getCountryCodes("P");
-		for (CountryCodeModel model : models) {
-			assertThat(model, is(notNullValue()));
-		}
-
-		assertThat(models.size(), is(1));
-	}
-
-	@Test
-	public void getCountryCodesForFilterTextFirstResulAndLimit() {
-		countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
-		
-		List<CountryCodeModel> models = countryCodeProvider.getCountryCodes("P", 0, 10);
-		for (CountryCodeModel model : models) {
-			assertThat(model, is(notNullValue()));
-		}
-
-		assertThat(models.size(), is(1));
-	}
-
-	@Test
-	public void removeCountryCode() {
-		CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
-		
-		String alpha2Code = model1.getAlpha2Code();
-		boolean result = countryCodeProvider.remove(model1);
-
-		CountryCodeModel model2 = countryCodeProvider.findByAlpha2Code(alpha2Code);
-
-		assertThat(result, is(true));
-		assertThat(model2, is(nullValue()));
-	}*/
+    /*
+     * @Test public void getCountryCodes() { countryCodeProvider.create("PE",
+     * "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
+     * 
+     * List<CountryCodeModel> models = countryCodeProvider.getCountryCodes();
+     * for (CountryCodeModel model : models) { assertThat(model,
+     * is(notNullValue())); }
+     * 
+     * assertThat(models.size(), is(1)); }
+     * 
+     * @Test public void getCountryCodesFirstResulAndLimit() {
+     * countryCodeProvider.create("PE", "PER", "051", true, true, "Peru",
+     * "PERU", "Republic of Peru");
+     * 
+     * List<CountryCodeModel> models = countryCodeProvider.getCountryCodes(0,
+     * 10); for (CountryCodeModel model : models) { assertThat(model,
+     * is(notNullValue())); }
+     * 
+     * assertThat(models.size(), is(1)); }
+     * 
+     * @Test public void getCountryCodesForFilterText() {
+     * countryCodeProvider.create("PE", "PER", "051", true, true, "Peru",
+     * "PERU", "Republic of Peru");
+     * 
+     * List<CountryCodeModel> models = countryCodeProvider.getCountryCodes("P");
+     * for (CountryCodeModel model : models) { assertThat(model,
+     * is(notNullValue())); }
+     * 
+     * assertThat(models.size(), is(1)); }
+     * 
+     * @Test public void getCountryCodesForFilterTextFirstResulAndLimit() {
+     * countryCodeProvider.create("PE", "PER", "051", true, true, "Peru",
+     * "PERU", "Republic of Peru");
+     * 
+     * List<CountryCodeModel> models = countryCodeProvider.getCountryCodes("P",
+     * 0, 10); for (CountryCodeModel model : models) { assertThat(model,
+     * is(notNullValue())); }
+     * 
+     * assertThat(models.size(), is(1)); }
+     * 
+     * @Test public void removeCountryCode() { CountryCodeModel model1 =
+     * countryCodeProvider.create("PE", "PER", "051", true, true, "Peru",
+     * "PERU", "Republic of Peru");
+     * 
+     * String alpha2Code = model1.getAlpha2Code(); boolean result =
+     * countryCodeProvider.remove(model1);
+     * 
+     * CountryCodeModel model2 =
+     * countryCodeProvider.findByAlpha2Code(alpha2Code);
+     * 
+     * assertThat(result, is(true)); assertThat(model2, is(nullValue())); }
+     */
 
 }

@@ -23,6 +23,46 @@ package org.sistcoop.iso3166.models.search;
  */
 public enum SearchCriteriaFilterOperator {
 
-    bool_eq, eq, neq, gt, gte, lt, lte, like;
+    /**
+     * Boolean equals
+     */
+    bool_eq,
+
+    /**
+     * Equals
+     */
+    eq,
+
+    /**
+     * Not equals
+     */
+    neq,
+
+    /**
+     * Greater than
+     */
+    gt,
+
+    /**
+     * Greater than equals
+     */
+    gte,
+
+    /**
+     * Leass than
+     */
+
+    /**
+     * less than
+     */
+    lt,
+
+    /** less than equals */
+    lte,
+
+    /**
+     * Like
+     */
+    like;
 
 }

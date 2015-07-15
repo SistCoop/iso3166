@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +18,7 @@ import org.sistcoop.iso3166.models.CountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
 import org.sistcoop.iso3166.models.search.SearchCriteriaModel;
 import org.sistcoop.iso3166.models.search.SearchResultsModel;
+import org.sistcoop.persona.models.search.filters.CountryCodeFilterProvider;
 
 @Named
 @Stateless
@@ -26,6 +28,9 @@ public class JpaCountryCodeProvider extends AbstractJpaStorage implements Countr
 
     @PersistenceContext
     private EntityManager em;
+
+    @Inject
+    private CountryCodeFilterProvider filterProvider;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -140,8 +145,19 @@ public class JpaCountryCodeProvider extends AbstractJpaStorage implements Countr
 
     @Override
     public SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria, String filterText) {
-        // TODO Auto-generated method stub
-        return null;
+        SearchResultsModel<CountryCodeEntity> entityResult = find(criteria, CountryCodeEntity.class,
+                filterText, filterProvider.getAlpha2CodeFilter(), filterProvider.getAlpha3CodeFilter(),
+                filterProvider.getNumericCodeFilter(), filterProvider.getShortNameEn(),
+                filterProvider.getShortNameUppercaseEn(), filterProvider.getFullNameEn());
+
+        SearchResultsModel<CountryCodeModel> modelResult = new SearchResultsModel<>();
+        List<CountryCodeModel> list = new ArrayList<>();
+        for (CountryCodeEntity entity : entityResult.getModels()) {
+            list.add(new CountryCodeAdapter(em, entity));
+        }
+        modelResult.setTotalSize(entityResult.getTotalSize());
+        modelResult.setModels(list);
+        return modelResult;
     }
 
 }
