@@ -12,7 +12,6 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.runner.RunWith;
 import org.sistcoop.iso3166.JaxRsActivator;
 import org.sistcoop.iso3166.admin.client.Config;
-import org.sistcoop.iso3166.admin.client.resource.CountryCodesResource;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.jpa.JpaCountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
@@ -39,8 +38,12 @@ public abstract class AbstractTest {
         File[] dependencies = Maven.resolver().resolve("org.slf4j:slf4j-simple:1.7.10").withoutTransitivity()
                 .asFile();
 
+        File[] files = Maven.resolver().resolve("com.jayway.restassured:rest-assured:2.4.1")
+                .withTransitivity().asFile();
+
         WebArchive war = ShrinkWrap
                 .create(WebArchive.class, "test.war")
+
                 /** model-api **/
                 .addPackage(Provider.class.getPackage())
                 .addPackage(CountryCodeModel.class.getPackage())
@@ -77,6 +80,7 @@ public abstract class AbstractTest {
                 .addAsManifestResource(EmptyAsset.INSTANCE, "web.xml").addAsWebInfResource("test-ds.xml");
 
         war.addAsLibraries(dependencies);
+        war.addAsLibraries(files);
 
         return war;
     }
