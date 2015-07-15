@@ -1,4 +1,4 @@
-package org.sistcoop.iso3166.models.jpa;
+package org.sistcoop.iso3166;
 
 import java.io.File;
 
@@ -11,6 +11,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.runner.RunWith;
 import org.sistcoop.iso3166.models.CountryCodeModel;
+import org.sistcoop.iso3166.models.jpa.JpaCountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
 import org.sistcoop.iso3166.models.jpa.search.filters.JpaCountryCodeFilterProvider;
 import org.sistcoop.iso3166.models.search.SearchCriteriaFilterModel;

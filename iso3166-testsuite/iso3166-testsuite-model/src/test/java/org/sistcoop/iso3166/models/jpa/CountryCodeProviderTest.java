@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import javax.inject.Inject;
 
 import org.junit.Test;
+import org.sistcoop.iso3166.AbstractTest;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.CountryCodeProvider;
 
