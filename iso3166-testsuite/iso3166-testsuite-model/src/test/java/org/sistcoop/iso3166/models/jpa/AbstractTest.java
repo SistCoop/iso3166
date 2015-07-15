@@ -1,4 +1,4 @@
-package org.sistcoop.iso3166;
+package org.sistcoop.iso3166.models.jpa;
 
 import java.io.File;
 
