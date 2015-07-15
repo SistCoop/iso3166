@@ -15,7 +15,7 @@ public class ModelToRepresentation {
         rep.setAlpha3Code(model.getAlpha3Code());
         rep.setNumericCode(model.getNumericCode());
         rep.setIndependent(model.isIndependent());
-        rep.setStatus(model.isStatus());
+        rep.setStatus(model.getStatus());
         rep.setShortNameEn(model.getShortNameEn());
         rep.setShortNameUppercaseEn(model.getShortNameUppercaseEn());
         rep.setFullNameEn(model.getFullNameEn());

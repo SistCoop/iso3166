@@ -14,7 +14,7 @@ public class CountryCodeRepresentation implements Serializable {
     private String numericCode;
 
     private Boolean independent;
-    private Boolean status;
+    private String status;
 
     private String shortNameEn;
     private String shortNameUppercaseEn;
@@ -52,11 +52,11 @@ public class CountryCodeRepresentation implements Serializable {
         this.independent = independent;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

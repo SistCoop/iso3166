@@ -18,7 +18,7 @@ public interface CountryCodeProvider extends Provider {
     CountryCodeModel findByNumericCode(String numericCode);
 
     CountryCodeModel create(String alpha2Code, String alpha3Code, String numericCode, boolean independent,
-            boolean status, String shortNameEn, String shortNameUppercaseEn, String fullNameEn);
+            String status, String shortNameEn, String shortNameUppercaseEn, String fullNameEn);
 
     boolean remove(CountryCodeModel countryCodeModel);
 

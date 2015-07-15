@@ -17,8 +17,8 @@ public class CountryCodeProviderTest extends AbstractTest {
 
     @Test
     public void create() {
-        CountryCodeModel model = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
-                "Republic of Peru");
+        CountryCodeModel model = countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned",
+                "Peru", "PERU", "Republic of Peru");
 
         assertThat(model, is(notNullValue()));
         assertThat(model.getId(), is(notNullValue()));
@@ -26,8 +26,8 @@ public class CountryCodeProviderTest extends AbstractTest {
 
     @Test
     public void getCountryCodeByAlpha2Code() {
-        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
-                "Republic of Peru");
+        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned",
+                "Peru", "PERU", "Republic of Peru");
 
         String alpha2Code = model1.getAlpha2Code();
 
@@ -38,8 +38,8 @@ public class CountryCodeProviderTest extends AbstractTest {
 
     @Test
     public void getCountryCodeByAlpha3Code() {
-        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
-                "Republic of Peru");
+        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned",
+                "Peru", "PERU", "Republic of Peru");
 
         String alpha3Code = model1.getAlpha3Code();
 
@@ -50,8 +50,8 @@ public class CountryCodeProviderTest extends AbstractTest {
 
     @Test
     public void getCountryCodeByNumericCode() {
-        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
-                "Republic of Peru");
+        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned",
+                "Peru", "PERU", "Republic of Peru");
 
         String numericCode = model1.getNumericCode();
 
@@ -62,7 +62,8 @@ public class CountryCodeProviderTest extends AbstractTest {
 
     @Test
     public void getCountryCodes() {
-        countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
+        countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned", "Peru", "PERU",
+                "Republic of Peru");
 
         SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search();
         for (CountryCodeModel model : results.getModels()) {
@@ -75,8 +76,8 @@ public class CountryCodeProviderTest extends AbstractTest {
 
     @Test
     public void remove() {
-        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU",
-                "Republic of Peru");
+        CountryCodeModel model1 = countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned",
+                "Peru", "PERU", "Republic of Peru");
 
         String alpha2Code = model1.getAlpha2Code();
         boolean result = countryCodeProvider.remove(model1);

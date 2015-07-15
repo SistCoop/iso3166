@@ -33,7 +33,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 
     @Override
     public CountryCodeModel create(String alpha2Code, String alpha3Code, String numericCode,
-            boolean independent, boolean status, String shortNameEn, String shortNameUppercaseEn,
+            boolean independent, String status, String shortNameEn, String shortNameUppercaseEn,
             String fullNameEn) {
         CountryCodeEntity entity = new CountryCodeEntity();
         entity.setAlpha2Code(alpha2Code);

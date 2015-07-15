@@ -43,7 +43,7 @@ public class CountryCodeEntity implements Serializable {
     private String numericCode;
 
     private boolean independent;
-    private boolean status;
+    private String status;
 
     private String shortNameEn;
     private String shortNameUppercaseEn;
@@ -103,13 +103,12 @@ public class CountryCodeEntity implements Serializable {
         this.independent = independent;
     }
 
-    @NotNull
-    @Type(type = "org.hibernate.type.TrueFalseType")
-    public boolean isStatus() {
+    @Size(min = 1, max = 200)
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

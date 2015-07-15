@@ -54,7 +54,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
                 .entity(Jsend.getSuccessJSend(model.getId())).build();
     }
 
-    @Override
+    // @Override
     public SearchResultsRepresentation<CountryCodeRepresentation> search() {
         SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
         searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
@@ -74,6 +74,10 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     @Override
     public SearchResultsRepresentation<CountryCodeRepresentation> search(String filterText, int page,
             int pageSize) {
+
+        if (filterText == null && page == 0 && pageSize == 0) {
+            return search();
+        }
 
         PagingModel paging = new PagingModel();
         paging.setPage(page);

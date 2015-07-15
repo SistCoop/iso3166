@@ -67,12 +67,12 @@ public class CountryCodeAdapter implements CountryCodeModel {
     }
 
     @Override
-    public boolean isStatus() {
+    public String getStatus() {
         return countryCodeEntity.isStatus();
     }
 
     @Override
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         countryCodeEntity.setStatus(status);
     }
 

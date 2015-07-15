@@ -1,7 +1,6 @@
 package org.sistcoop.iso3166.admin.client.resource;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,15 +23,17 @@ public interface CountryCodesResource {
     @POST
     public Response create(CountryCodeRepresentation representation);
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public SearchResultsRepresentation<CountryCodeRepresentation> search();
+    /*
+     * @GET
+     * 
+     * @Produces(MediaType.APPLICATION_JSON) public
+     * SearchResultsRepresentation<CountryCodeRepresentation> search();
+     */
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public SearchResultsRepresentation<CountryCodeRepresentation> search(
-            @QueryParam("filterText") String filterText,
-            @QueryParam("page") @DefaultValue(value = "1") int page,
-            @QueryParam("pageSize") @DefaultValue(value = "10") int pageSize);
+            @QueryParam("filterText") String filterText, @QueryParam("page") int page,
+            @QueryParam("pageSize") int pageSize);
 
 }

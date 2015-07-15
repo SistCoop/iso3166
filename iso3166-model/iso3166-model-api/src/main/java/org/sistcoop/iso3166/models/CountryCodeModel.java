@@ -14,9 +14,9 @@ public interface CountryCodeModel extends Model {
 
 	void setIndependent(boolean independent);
 
-	boolean isStatus();
+	String getStatus();
 
-	void setStatus(boolean status);
+	void setStatus(String status);
 
 	String getShortNameEn();
 
