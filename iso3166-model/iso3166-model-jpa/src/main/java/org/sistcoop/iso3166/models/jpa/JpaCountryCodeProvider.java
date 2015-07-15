@@ -22,10 +22,15 @@ import org.sistcoop.iso3166.models.search.SearchResultsModel;
 @Stateless
 @Local(CountryCodeProvider.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class JpaCountryCodeProvider implements CountryCodeProvider {
+public class JpaCountryCodeProvider extends AbstractJpaStorage implements CountryCodeProvider {
 
     @PersistenceContext
-    protected EntityManager em;
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return this.em;
+    }
 
     @Override
     public void close() {
@@ -36,6 +41,7 @@ public class JpaCountryCodeProvider implements CountryCodeProvider {
     public CountryCodeModel create(String alpha2Code, String alpha3Code, String numericCode,
             boolean independent, boolean status, String shortNameEn, String shortNameUppercaseEn,
             String fullNameEn) {
+
         CountryCodeEntity entity = new CountryCodeEntity();
         entity.setAlpha2Code(alpha2Code);
         entity.setAlpha3Code(alpha3Code);
@@ -52,55 +58,84 @@ public class JpaCountryCodeProvider implements CountryCodeProvider {
     @Override
     public boolean remove(CountryCodeModel countryCodeModel) {
         CountryCodeEntity countryCodeEntity = em.find(CountryCodeEntity.class, countryCodeModel.getId());
-        if (countryCodeEntity == null)
+        if (countryCodeEntity == null) {
             return false;
+        }
         em.remove(countryCodeEntity);
         return true;
     }
 
     @Override
+    public CountryCodeModel findById(String id) {
+        CountryCodeEntity countryCodeEntity = this.em.find(CountryCodeEntity.class, id);
+        return countryCodeEntity != null ? new CountryCodeAdapter(em, countryCodeEntity) : null;
+    }
+
+    @Override
     public CountryCodeModel findByAlpha2Code(String alpha2Code) {
-        TypedQuery<CountryCodeEntity> query = em.createNamedQuery(CountryCodeEntity.findByAlpha2Code,
+        TypedQuery<CountryCodeEntity> query = em.createNamedQuery("CountryCodeEntity.findByAlpha2Code",
                 CountryCodeEntity.class);
         query.setParameter("alpha2Code", alpha2Code);
         List<CountryCodeEntity> results = query.getResultList();
-        if (results.size() == 0)
+        if (results.size() == 0) {
             return null;
+        }
         return new CountryCodeAdapter(em, results.get(0));
     }
 
     @Override
     public CountryCodeModel findByAlpha3Code(String alpha3Code) {
-        TypedQuery<CountryCodeEntity> query = em.createNamedQuery(CountryCodeEntity.findByAlpha3Code,
+        TypedQuery<CountryCodeEntity> query = em.createNamedQuery("CountryCodeEntity.findByAlpha3Code",
                 CountryCodeEntity.class);
         query.setParameter("alpha3Code", alpha3Code);
         List<CountryCodeEntity> results = query.getResultList();
-        if (results.size() == 0)
+        if (results.size() == 0) {
             return null;
+        }
         return new CountryCodeAdapter(em, results.get(0));
     }
 
     @Override
     public CountryCodeModel findByNumericCode(String numericCode) {
-        TypedQuery<CountryCodeEntity> query = em.createNamedQuery(CountryCodeEntity.findByNumericCode,
+        TypedQuery<CountryCodeEntity> query = em.createNamedQuery("CountryCodeEntity.findByNumericCode",
                 CountryCodeEntity.class);
         query.setParameter("numericCode", numericCode);
         List<CountryCodeEntity> results = query.getResultList();
-        if (results.size() == 0)
+        if (results.size() == 0) {
             return null;
+        }
         return new CountryCodeAdapter(em, results.get(0));
     }
 
     @Override
     public SearchResultsModel<CountryCodeModel> search() {
-        // TODO Auto-generated method stub
-        return null;
+        TypedQuery<CountryCodeEntity> query = em.createNamedQuery("CountryCodeEntity.findAll",
+                CountryCodeEntity.class);
+
+        List<CountryCodeEntity> entities = query.getResultList();
+        List<CountryCodeModel> models = new ArrayList<CountryCodeModel>();
+        for (CountryCodeEntity countryCodeEntity : entities) {
+            models.add(new CountryCodeAdapter(em, countryCodeEntity));
+        }
+
+        SearchResultsModel<CountryCodeModel> result = new SearchResultsModel<>();
+        result.setModels(models);
+        result.setTotalSize(models.size());
+        return result;
     }
 
     @Override
     public SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria) {
-        // TODO Auto-generated method stub
-        return null;
+        SearchResultsModel<CountryCodeEntity> entityResult = find(criteria, CountryCodeEntity.class);
+
+        SearchResultsModel<CountryCodeModel> modelResult = new SearchResultsModel<>();
+        List<CountryCodeModel> list = new ArrayList<>();
+        for (CountryCodeEntity entity : entityResult.getModels()) {
+            list.add(new CountryCodeAdapter(em, entity));
+        }
+        modelResult.setTotalSize(entityResult.getTotalSize());
+        modelResult.setModels(list);
+        return modelResult;
     }
 
     @Override

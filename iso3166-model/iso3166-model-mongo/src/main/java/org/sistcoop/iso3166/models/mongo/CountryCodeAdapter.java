@@ -37,7 +37,7 @@ public class CountryCodeAdapter implements CountryCodeModel {
 	}
 
 	@Override
-	public Integer getId() {
+	public String getId() {
 		return countryCodeEntity.getId();
 	}
 	

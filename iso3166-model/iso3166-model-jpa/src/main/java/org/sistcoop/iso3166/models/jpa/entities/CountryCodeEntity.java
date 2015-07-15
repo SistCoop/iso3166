@@ -2,6 +2,8 @@ package org.sistcoop.iso3166.models.jpa.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,20 +11,28 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.NotBlank;
 
+@Cacheable
 @Entity
+@Indexed
 @Table(name = "COUNTRY_CODE")
 @NamedQueries({
-        @NamedQuery(name = CountryCodeEntity.findAll, query = "SELECT c FROM CountryCodeEntity c"),
-        @NamedQuery(name = CountryCodeEntity.findByAlpha2Code, query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha2Code = :alpha2Code"),
-        @NamedQuery(name = CountryCodeEntity.findByAlpha3Code, query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha3Code = :alpha3Code"),
-        @NamedQuery(name = CountryCodeEntity.findByNumericCode, query = "SELECT c FROM CountryCodeEntity c WHERE c.numericCode = :numericCode"),
-        @NamedQuery(name = CountryCodeEntity.findByFilterText, query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha2Code LIKE :filterText OR c.alpha3Code LIKE :filterText OR c.numericCode LIKE :filterText OR c.shortNameEn LIKE :filterText OR c.shortNameUppercaseEn LIKE :filterText OR c.fullNameEn LIKE :filterText"),
-        @NamedQuery(name = CountryCodeEntity.count, query = "select count(u) from CountryCodeEntity u") })
+        @NamedQuery(name = "CountryCodeEntity.findAll", query = "SELECT c FROM CountryCodeEntity c"),
+        @NamedQuery(name = "CountryCodeEntity.findByAlpha2Code", query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha2Code = :alpha2Code"),
+        @NamedQuery(name = "CountryCodeEntity.findByAlpha3Code", query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha3Code = :alpha3Code"),
+        @NamedQuery(name = "CountryCodeEntity.findByNumericCode", query = "SELECT c FROM CountryCodeEntity c WHERE c.numericCode = :numericCode"),
+        @NamedQuery(name = "CountryCodeEntity.findByFilterText", query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha2Code LIKE :filterText OR c.alpha3Code LIKE :filterText OR c.numericCode LIKE :filterText OR c.shortNameEn LIKE :filterText OR c.shortNameUppercaseEn LIKE :filterText OR c.fullNameEn LIKE :filterText"),
+        @NamedQuery(name = "CountryCodeEntity.count", query = "select count(u) from CountryCodeEntity u") })
 public class CountryCodeEntity implements Serializable {
 
     /**
@@ -30,15 +40,7 @@ public class CountryCodeEntity implements Serializable {
 	 */
     private static final long serialVersionUID = 1L;
 
-    public final static String base = "org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity.";
-    public final static String findAll = base + "findAll";
-    public final static String findByAlpha2Code = base + "findByAlpha2Code";
-    public final static String findByAlpha3Code = base + "findByAlpha3Code";
-    public final static String findByNumericCode = base + "findByNumericCode";
-    public final static String findByFilterText = base + "findByFilterText";
-    public final static String count = base + "count";
-
-    private Integer id;
+    private String id;
     private String alpha2Code;
     private String alpha3Code;
     private String numericCode;
@@ -55,18 +57,22 @@ public class CountryCodeEntity implements Serializable {
     }
 
     @Id
-    @GeneratedValue(generator = "SgGenericGenerator")
-    public Integer getId() {
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "ID")
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     @NotNull
     @NotBlank
     @Size(min = 2, max = 2)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Column(name = "alpha2Code")
     public String getAlpha2Code() {
         return alpha2Code;
     }
@@ -78,6 +84,8 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 3, max = 3)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Column(name = "alpha3Code")
     public String getAlpha3Code() {
         return alpha3Code;
     }
@@ -89,6 +97,8 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 3, max = 3)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Column(name = "numericCode")
     public String getNumericCode() {
         return numericCode;
     }
@@ -99,6 +109,7 @@ public class CountryCodeEntity implements Serializable {
 
     @NotNull
     @Type(type = "org.hibernate.type.TrueFalseType")
+    @Column(name = "independent")
     public boolean isIndependent() {
         return independent;
     }
@@ -109,6 +120,7 @@ public class CountryCodeEntity implements Serializable {
 
     @NotNull
     @Type(type = "org.hibernate.type.TrueFalseType")
+    @Column(name = "status")
     public boolean isStatus() {
         return status;
     }
@@ -120,6 +132,8 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 200)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Column(name = "shortNameEn")
     public String getShortNameEn() {
         return shortNameEn;
     }
@@ -131,6 +145,8 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 200)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Column(name = "shortNameUppercaseEn")
     public String getShortNameUppercaseEn() {
         return shortNameUppercaseEn;
     }
@@ -142,6 +158,8 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 200)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Column(name = "fullNameEn")
     public String getFullNameEn() {
         return fullNameEn;
     }

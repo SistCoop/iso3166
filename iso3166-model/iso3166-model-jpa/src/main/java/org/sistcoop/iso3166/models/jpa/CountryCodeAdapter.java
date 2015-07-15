@@ -12,8 +12,8 @@ public class CountryCodeAdapter implements CountryCodeModel {
 	 */
     private static final long serialVersionUID = 1L;
 
-    protected CountryCodeEntity countryCodeEntity;
-    protected EntityManager em;
+    private CountryCodeEntity countryCodeEntity;
+    private EntityManager em;
 
     public CountryCodeAdapter(EntityManager em, CountryCodeEntity countryCodeEntity) {
         this.em = em;
@@ -37,7 +37,7 @@ public class CountryCodeAdapter implements CountryCodeModel {
     }
 
     @Override
-    public Integer getId() {
+    public String getId() {
         return countryCodeEntity.getId();
     }
 

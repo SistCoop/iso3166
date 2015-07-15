@@ -7,6 +7,8 @@ import org.sistcoop.iso3166.provider.Provider;
 @Local
 public interface CountryCodeFilterProvider extends Provider {
 
+    String getIdFilter();
+
     String getAlpha2CodeFilter();
 
     String getAlpha3CodeFilter();

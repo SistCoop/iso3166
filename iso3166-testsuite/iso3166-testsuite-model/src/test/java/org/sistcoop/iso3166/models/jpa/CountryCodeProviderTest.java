@@ -2,12 +2,10 @@ package org.sistcoop.iso3166.models.jpa;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,8 +20,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.CountryCodeProvider;
-import org.sistcoop.iso3166.models.jpa.CountryCodeAdapter;
-import org.sistcoop.iso3166.models.jpa.JpaCountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
 import org.sistcoop.iso3166.provider.Provider;
 import org.slf4j.Logger;
@@ -108,7 +104,7 @@ public class CountryCodeProviderTest {
 		assertThat(model1, is(equalTo(model2)));
 	}
 		
-	@Test
+	/*@Test
 	public void getCountryCodes() {
 		countryCodeProvider.create("PE", "PER", "051", true, true, "Peru", "PERU", "Republic of Peru");
 		
@@ -167,6 +163,6 @@ public class CountryCodeProviderTest {
 
 		assertThat(result, is(true));
 		assertThat(model2, is(nullValue()));
-	}
+	}*/
 
 }

@@ -55,6 +55,23 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     }
 
     @Override
+    public SearchResultsRepresentation<CountryCodeRepresentation> search() {
+        SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
+        searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
+
+        // search
+        SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search(searchCriteriaBean);
+        SearchResultsRepresentation<CountryCodeRepresentation> rep = new SearchResultsRepresentation<>();
+        List<CountryCodeRepresentation> representations = new ArrayList<>();
+        for (CountryCodeModel model : results.getModels()) {
+            representations.add(ModelToRepresentation.toRepresentation(model));
+        }
+        rep.setTotalSize(results.getTotalSize());
+        rep.setItems(representations);
+        return rep;
+    }
+
+    @Override
     public SearchResultsRepresentation<CountryCodeRepresentation> search(String filterText, int page,
             int pageSize) {
 
@@ -64,7 +81,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 
         SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
         searchCriteriaBean.setPaging(paging);
-        searchCriteriaBean.setOrder(filterProvider.getShortNameEn(), true);
+        searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
 
         // search
         SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search(searchCriteriaBean,

@@ -14,9 +14,8 @@ import javax.ws.rs.core.Response;
 import org.sistcoop.iso3166.representations.idm.CountryCodeRepresentation;
 import org.sistcoop.iso3166.representations.idm.search.SearchResultsRepresentation;
 
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 @Path("/countryCodes")
+@Consumes(MediaType.APPLICATION_JSON)
 public interface CountryCodesResource {
 
     @Path("/{countryCode}")
@@ -27,8 +26,12 @@ public interface CountryCodesResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    public SearchResultsRepresentation<CountryCodeRepresentation> search();
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public SearchResultsRepresentation<CountryCodeRepresentation> search(
-            @QueryParam("filterText") @DefaultValue(value = "") String filterText,
+            @QueryParam("filterText") String filterText,
             @QueryParam("page") @DefaultValue(value = "1") int page,
             @QueryParam("pageSize") @DefaultValue(value = "10") int pageSize);
 

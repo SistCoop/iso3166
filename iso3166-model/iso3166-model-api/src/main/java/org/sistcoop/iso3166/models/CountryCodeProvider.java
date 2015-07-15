@@ -9,16 +9,18 @@ import org.sistcoop.iso3166.provider.Provider;
 @Local
 public interface CountryCodeProvider extends Provider {
 
-    CountryCodeModel create(String alpha2Code, String alpha3Code, String numericCode, boolean independent,
-            boolean status, String shortNameEn, String shortNameUppercaseEn, String fullNameEn);
-
-    boolean remove(CountryCodeModel countryCodeModel);
+    CountryCodeModel findById(String id);
 
     CountryCodeModel findByAlpha2Code(String alpha2Code);
 
     CountryCodeModel findByAlpha3Code(String alpha3Code);
 
     CountryCodeModel findByNumericCode(String numericCode);
+
+    CountryCodeModel create(String alpha2Code, String alpha3Code, String numericCode, boolean independent,
+            boolean status, String shortNameEn, String shortNameUppercaseEn, String fullNameEn);
+
+    boolean remove(CountryCodeModel countryCodeModel);
 
     SearchResultsModel<CountryCodeModel> search();
 

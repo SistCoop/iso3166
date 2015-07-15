@@ -2,7 +2,7 @@ package org.sistcoop.iso3166.models;
 
 public interface CountryCodeModel extends Model {
 
-	Integer getId();
+	String getId();
 	
 	String getAlpha2Code();
 
