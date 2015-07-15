@@ -49,7 +49,7 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     @Override
     public Response create(CountryCodeRepresentation representation) {
         CountryCodeModel model = representationToModel.createCountryCode(representation, countryCodeProvider);
-        return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId().toString()).build())
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build())
                 .header("Access-Control-Expose-Headers", "Location")
                 .entity(Jsend.getSuccessJSend(model.getId())).build();
     }

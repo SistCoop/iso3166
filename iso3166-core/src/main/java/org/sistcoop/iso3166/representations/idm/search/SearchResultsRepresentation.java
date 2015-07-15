@@ -31,7 +31,7 @@ public class SearchResultsRepresentation<T> implements Serializable {
     private static final long serialVersionUID = -1672829715471947181L;
 
     private List<T> items = new ArrayList<>();
-    private int totalSize;
+    private long totalSize;
 
     /**
      * Constructor.
@@ -57,7 +57,7 @@ public class SearchResultsRepresentation<T> implements Serializable {
     /**
      * @return the totalSize
      */
-    public int getTotalSize() {
+    public long getTotalSize() {
         return totalSize;
     }
 
@@ -65,7 +65,7 @@ public class SearchResultsRepresentation<T> implements Serializable {
      * @param totalSize
      *            the totalSize to set
      */
-    public void setTotalSize(int totalSize) {
+    public void setTotalSize(long totalSize) {
         this.totalSize = totalSize;
     }
 

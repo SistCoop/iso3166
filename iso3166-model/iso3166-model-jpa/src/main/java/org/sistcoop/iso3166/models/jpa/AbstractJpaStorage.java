@@ -43,14 +43,14 @@ public abstract class AbstractJpaStorage {
 
         // Set paging
         PagingModel paging = searchCriteriaModel.getPaging();
-        int page = 0;
-        int pageSize = 0;
-        int start = 0;
-        boolean hasMore = false;
+        // int page = 0;
+        // int pageSize = 0;
+        // int start = 0;
+        // boolean hasMore = false;
         if (paging != null) {
-            page = paging.getPage();
-            pageSize = paging.getPageSize();
-            start = (page - 1) * pageSize;
+            int page = paging.getPage();
+            int pageSize = paging.getPageSize();
+            int start = (page - 1) * pageSize;
 
             criteria.setFirstResult(start);
             criteria.setMaxResults(pageSize + 1);
@@ -61,18 +61,18 @@ public abstract class AbstractJpaStorage {
         List<T> resultList = criteria.list();
 
         // Check if we got back more than we actually needed.
-        if (resultList.size() > pageSize) {
-            resultList.remove(resultList.size() - 1);
-            hasMore = true;
-        }
+        // if (resultList.size() > pageSize) {
+        // resultList.remove(resultList.size() - 1);
+        // hasMore = true;
+        // }
 
         // If there are more results than we needed, then we will need to do
         // another
         // query to determine how many rows there are in total
-        int totalSize = start + resultList.size();
-        if (hasMore) {
-            totalSize = executeCountQuery(searchCriteriaModel, session, type);
-        }
+        // long totalSize = start + resultList.size();
+        // if (hasMore) {
+        long totalSize = executeCountQuery(searchCriteriaModel, session, type);
+        // }
         results.setTotalSize(totalSize);
         results.setModels(resultList);
         return results;
@@ -132,12 +132,12 @@ public abstract class AbstractJpaStorage {
         return results;
     }
 
-    protected <T> int executeCountQuery(SearchCriteriaModel searchCriteriaModel, Session session,
+    protected <T> long executeCountQuery(SearchCriteriaModel searchCriteriaModel, Session session,
             Class<T> type) {
         Criteria criteria = session.createCriteria(type);
         applySearchCriteriaToQuery(searchCriteriaModel, criteria, true);
         criteria.setProjection(Projections.rowCount());
-        return (int) criteria.uniqueResult();
+        return (long) criteria.uniqueResult();
     }
 
     protected <T> void applySearchCriteriaToQuery(SearchCriteriaModel searchCriteriaModel, Criteria criteria,
