@@ -9,7 +9,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.sistcoop.iso3166.Jsend;
 import org.sistcoop.iso3166.admin.client.resource.CountryCodeResource;
 import org.sistcoop.iso3166.admin.client.resource.CountryCodesResource;
 import org.sistcoop.iso3166.models.CountryCodeModel;
@@ -49,9 +48,9 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     @Override
     public Response create(CountryCodeRepresentation representation) {
         CountryCodeModel model = representationToModel.createCountryCode(representation, countryCodeProvider);
-        return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build())
+        return Response.created(uriInfo.getAbsolutePathBuilder().build())
                 .header("Access-Control-Expose-Headers", "Location")
-                .entity(Jsend.getSuccessJSend(model.getId())).build();
+                .entity(ModelToRepresentation.toRepresentation(model)).build();
     }
 
     @Override

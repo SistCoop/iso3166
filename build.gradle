@@ -1,6 +1,17 @@
 apply from: "$rootDir/gradle/envConfig.gradle"
 apply from: "$rootDir/gradle/versioning.gradle"
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://nexus.qmino.com/content/repositories/miredot" }
+        maven { url "http://nexus.qmino.com/content/repositories/miredot-snapshots" }
+    }
+    dependencies {
+        classpath 'com.qmino:miredot-plugin:1.6.1'
+    }
+}
+
 /**
  * sonar-runner */
 apply plugin: 'sonar-runner'
@@ -15,7 +26,7 @@ sonarRunner {
 allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
-    group = 'org.sistcoop.iso3166'
+    group = 'org.sistcoop'
 }
 
 subprojects {
