@@ -8,14 +8,14 @@ ext {
 
 publishing {
     publications {
-        toDoWebApp(MavenPublication) {
+        War(MavenPublication) {
             from components.web
             artifactId 'cooperativa'
 
             pom.withXml {
                 def root = asNode()
                 root.appendNode('name', 'Cooperativa')
-                root.appendNode('description', 'Cooperativa Rest.')
+                root.appendNode('description', 'Cooperativa War.')
             }
         }
     }
@@ -26,9 +26,9 @@ publishing {
             url artifactoryReleaseRepoUrl
 
             credentials {
-                username = artifactoryUsername                                 
+                username = artifactoryUsername
                 password = artifactoryPassword
             }
-        }   
+        }
     }
 }
