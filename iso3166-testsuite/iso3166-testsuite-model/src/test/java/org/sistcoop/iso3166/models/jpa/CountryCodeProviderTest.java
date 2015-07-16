@@ -70,7 +70,7 @@ public class CountryCodeProviderTest extends AbstractTest {
             assertThat(model, is(notNullValue()));
         }
 
-        assertThat(results.getTotalSize(), is(1l));
+        assertThat(results.getTotalSize(), is(1));
         assertThat(results.getModels().size(), is(1));
     }
 

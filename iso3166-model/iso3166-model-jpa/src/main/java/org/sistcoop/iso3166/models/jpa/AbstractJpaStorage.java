@@ -71,7 +71,7 @@ public abstract class AbstractJpaStorage {
         // query to determine how many rows there are in total
         // long totalSize = start + resultList.size();
         // if (hasMore) {
-        long totalSize = executeCountQuery(searchCriteriaModel, session, type);
+        int totalSize = executeCountQuery(searchCriteriaModel, session, type);
         // }
         results.setTotalSize(totalSize);
         results.setModels(resultList);
@@ -132,12 +132,12 @@ public abstract class AbstractJpaStorage {
         return results;
     }
 
-    protected <T> long executeCountQuery(SearchCriteriaModel searchCriteriaModel, Session session,
+    protected <T> int executeCountQuery(SearchCriteriaModel searchCriteriaModel, Session session,
             Class<T> type) {
         Criteria criteria = session.createCriteria(type);
         applySearchCriteriaToQuery(searchCriteriaModel, criteria, true);
         criteria.setProjection(Projections.rowCount());
-        return (long) criteria.uniqueResult();
+        return ((Long) criteria.uniqueResult()).intValue();
     }
 
     protected <T> void applySearchCriteriaToQuery(SearchCriteriaModel searchCriteriaModel, Criteria criteria,

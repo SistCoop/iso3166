@@ -28,10 +28,10 @@ import java.util.List;
  */
 public class SearchResultsRepresentation<T> implements Serializable {
 
-    private static final long serialVersionUID = -1672829715471947181L;
+    private static final long serialVersionUID = 7557720618049390833L;
 
     private List<T> items = new ArrayList<>();
-    private long totalSize;
+    private int totalSize;
 
     /**
      * Constructor.
@@ -57,7 +57,7 @@ public class SearchResultsRepresentation<T> implements Serializable {
     /**
      * @return the totalSize
      */
-    public long getTotalSize() {
+    public int getTotalSize() {
         return totalSize;
     }
 
@@ -65,7 +65,7 @@ public class SearchResultsRepresentation<T> implements Serializable {
      * @param totalSize
      *            the totalSize to set
      */
-    public void setTotalSize(long totalSize) {
+    public void setTotalSize(int totalSize) {
         this.totalSize = totalSize;
     }
 
