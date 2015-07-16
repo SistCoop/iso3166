@@ -21,6 +21,7 @@ public interface CountryCodesResource {
     public CountryCodeResource countryCode(@PathParam("countryCode") String countryCode);
 
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(CountryCodeRepresentation representation);
 
     /*
@@ -33,7 +34,7 @@ public interface CountryCodesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public SearchResultsRepresentation<CountryCodeRepresentation> search(
-            @QueryParam("filterText") String filterText, @QueryParam("page") int page,
-            @QueryParam("pageSize") int pageSize);
+            @QueryParam("filterText") String filterText, @QueryParam("page") Integer page,
+            @QueryParam("pageSize") Integer pageSize);
 
 }

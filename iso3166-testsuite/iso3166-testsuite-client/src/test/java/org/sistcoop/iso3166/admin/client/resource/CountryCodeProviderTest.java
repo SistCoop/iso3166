@@ -5,16 +5,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-
 import org.junit.Test;
+import org.sistcoop.iso3166.Jsend;
 import org.sistcoop.iso3166.representations.idm.CountryCodeRepresentation;
+import org.sistcoop.iso3166.representations.idm.search.SearchResultsRepresentation;
 
-import com.jayway.restassured.path.json.JsonPath;
-import com.jayway.restassured.response.Response;
+import com.jayway.restassured.http.ContentType;
 
 public class CountryCodeProviderTest extends AbstractTest {
 
@@ -22,47 +18,47 @@ public class CountryCodeProviderTest extends AbstractTest {
 
     @Test
     public void create() {
-        // create
-        JsonObject jsonRep = Json.createObjectBuilder().add("alpha2Code", "XX").add("alpha3Code", "XXX")
-                .add("numericCode", "000").add("independent", true).add("status", "officially-assigned")
-                .add("shortNameEn", "Peru").add("shortNameUppercaseEn", "PERU")
-                .add("fullNameEn", "Republica del Peru").build();
-        Response response = given().contentType("application/json").body(jsonRep.toString()).when()
-                .post(baseURI);
+        CountryCodeRepresentation representation = new CountryCodeRepresentation();
+        representation.setAlpha2Code("XX");
+        representation.setAlpha3Code("ABC");
+        representation.setNumericCode("123");
+        representation.setShortNameEn("Peru");
+        representation.setShortNameUppercaseEn("PERU");
+        representation.setFullNameEn("Republica del Peru");
+        representation.setIndependent(true);
+        representation.setStatus("oficially-assigned");
 
-        // extract
-        JsonPath jsonPath = response.getBody().jsonPath();
-        String id = jsonPath.getObject("id", String.class);
+        Jsend jsend = given().contentType(ContentType.JSON).body(representation).log().everything().expect()
+                .statusCode(201).log().ifError().when().post(baseURI).as(Jsend.class);
 
-        // assert
-        assertThat(response, is(notNullValue()));
-        assertThat(response.getStatusCode(), is(201));
-
-        assertThat(id, is(notNullValue()));
+        assertThat(jsend, is(notNullValue()));
+        assertThat(jsend.getId(), is(notNullValue()));
     }
 
     @Test
     public void search() {
-        // create
-        JsonObject jsonRep = Json.createObjectBuilder().add("alpha2Code", "XX").add("alpha3Code", "XXX")
-                .add("numericCode", "000").add("independent", true).add("status", "officially-assigned")
-                .add("shortNameEn", "Peru").add("shortNameUppercaseEn", "PERU")
-                .add("fullNameEn", "Republica del Peru").build();
-        given().contentType("application/json").body(jsonRep.toString()).when().post(baseURI);
+        CountryCodeRepresentation representation = new CountryCodeRepresentation();
+        representation.setAlpha2Code("XX");
+        representation.setAlpha3Code("ABC");
+        representation.setNumericCode("123");
+        representation.setShortNameEn("Peru");
+        representation.setShortNameUppercaseEn("PERU");
+        representation.setFullNameEn("Republica del Peru");
+        representation.setIndependent(true);
+        representation.setStatus("oficially-assigned");
 
-        // search
-        Response response = given().contentType("application/json").when().get(baseURI);
+        @SuppressWarnings("unused")
+        Jsend jsend = given().contentType(ContentType.JSON).body(representation).log().everything().expect()
+                .statusCode(201).log().ifError().when().post(baseURI).as(Jsend.class);
 
-        // extract
-        JsonPath jsonPath = response.getBody().jsonPath();
-        long totalSize = jsonPath.getObject("totalSize", Long.class);
-        List<CountryCodeRepresentation> representations = jsonPath.getList("items");
+        @SuppressWarnings("rawtypes")
+        SearchResultsRepresentation result = given().contentType(ContentType.JSON).log().everything()
+                .expect().statusCode(200).log().ifError().when().get(baseURI)
+                .as(SearchResultsRepresentation.class);
 
         // assert
-        assertThat(response, is(notNullValue()));
-        assertThat(response.getStatusCode(), is(200));
-
-        assertThat(totalSize, is(1l));
-        assertThat(representations.size(), is(1));
+        assertThat(result, is(notNullValue()));
+        assertThat(result.getTotalSize(), is(1l));
+        assertThat(result.getItems().size(), is(1));
     }
 }

@@ -35,10 +35,10 @@ public abstract class AbstractTest {
 
     @Deployment
     public static WebArchive createDeployment() {
-        File[] dependencies = Maven.resolver().resolve("org.slf4j:slf4j-simple:1.7.10").withoutTransitivity()
+        File[] logger = Maven.resolver().resolve("org.slf4j:slf4j-simple:1.7.10").withoutTransitivity()
                 .asFile();
 
-        File[] files = Maven.resolver().resolve("com.jayway.restassured:rest-assured:2.4.1")
+        File[] restAssured = Maven.resolver().resolve("com.jayway.restassured:rest-assured:2.4.1")
                 .withTransitivity().asFile();
 
         WebArchive war = ShrinkWrap
@@ -79,8 +79,8 @@ public abstract class AbstractTest {
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "web.xml").addAsWebInfResource("test-ds.xml");
 
-        war.addAsLibraries(dependencies);
-        war.addAsLibraries(files);
+        war.addAsLibraries(logger);
+        war.addAsLibraries(restAssured);
 
         return war;
     }

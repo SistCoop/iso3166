@@ -21,7 +21,7 @@ dependencies {
 	testCompile "org.jboss.arquillian.extension:arquillian-persistence-api:1.0.0.Alpha7"
 	testCompile "org.jboss.arquillian.extension:arquillian-persistence-impl:1.0.0.Alpha6"
 	
-	testCompile 'com.jayway.restassured:rest-assured:2.4.1'	
+	testCompile 'com.jayway.restassured:rest-assured:2.4.1'		
 }
 
 test {

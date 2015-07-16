@@ -13,8 +13,7 @@ public class Jsend implements Serializable {
 
 	public static Jsend getSuccessJSend(Object id) {
 		Jsend jsend = new Jsend();
-		jsend.setId(id);
-		
+		jsend.setId(id);		
 		return jsend;
 	}
 
