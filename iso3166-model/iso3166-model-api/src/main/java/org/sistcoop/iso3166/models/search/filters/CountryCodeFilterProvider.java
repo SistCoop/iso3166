@@ -1,4 +1,4 @@
-package org.sistcoop.persona.models.search.filters;
+package org.sistcoop.iso3166.models.search.filters;
 
 import javax.ejb.Local;
 

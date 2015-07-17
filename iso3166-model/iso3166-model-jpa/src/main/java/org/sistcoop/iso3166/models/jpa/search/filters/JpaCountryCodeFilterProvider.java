@@ -6,7 +6,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Named;
 
-import org.sistcoop.persona.models.search.filters.CountryCodeFilterProvider;
+import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 
 @Named
 @Stateless

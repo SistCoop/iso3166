@@ -23,7 +23,7 @@ import org.sistcoop.iso3166.representations.idm.CountryCodeRepresentation;
 import org.sistcoop.iso3166.representations.idm.search.SearchResultsRepresentation;
 import org.sistcoop.iso3166.services.messages.Messages;
 import org.sistcoop.iso3166.services.resources.admin.CountryCodesResourceImpl;
-import org.sistcoop.persona.models.search.filters.CountryCodeFilterProvider;
+import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
