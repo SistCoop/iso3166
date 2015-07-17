@@ -20,7 +20,7 @@ import org.sistcoop.iso3166.models.utils.ModelToRepresentation;
 import org.sistcoop.iso3166.models.utils.RepresentationToModel;
 import org.sistcoop.iso3166.representations.idm.CountryCodeRepresentation;
 import org.sistcoop.iso3166.representations.idm.search.SearchResultsRepresentation;
-import org.sistcoop.persona.models.search.filters.CountryCodeFilterProvider;
+import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 
 @Stateless
 public class CountryCodesResourceImpl implements CountryCodesResource {

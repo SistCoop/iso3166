@@ -11,12 +11,11 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.runner.RunWith;
 import org.sistcoop.iso3166.models.CountryCodeModel;
-import org.sistcoop.iso3166.models.jpa.JpaCountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
 import org.sistcoop.iso3166.models.jpa.search.filters.JpaCountryCodeFilterProvider;
 import org.sistcoop.iso3166.models.search.SearchCriteriaFilterModel;
 import org.sistcoop.iso3166.provider.Provider;
-import org.sistcoop.persona.models.search.filters.CountryCodeFilterProvider;
+import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

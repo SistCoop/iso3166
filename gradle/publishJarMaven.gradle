@@ -15,7 +15,7 @@ publishing {
 
     repositories {
         maven {
-            name 'remoteArtifactory'
+            name 'remoteJarArtifactory'
             url artifactoryReleaseRepoUrl
 
             credentials {

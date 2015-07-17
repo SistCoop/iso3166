@@ -18,7 +18,7 @@ import org.sistcoop.iso3166.models.CountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
 import org.sistcoop.iso3166.models.search.SearchCriteriaModel;
 import org.sistcoop.iso3166.models.search.SearchResultsModel;
-import org.sistcoop.persona.models.search.filters.CountryCodeFilterProvider;
+import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 
 @Named
 @Stateless
