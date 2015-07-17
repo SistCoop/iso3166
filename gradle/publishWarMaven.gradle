@@ -22,7 +22,7 @@ publishing {
 
     repositories {
         maven {
-            name 'remoteArtifactory'
+            name 'remoteWarArtifactory'
             url artifactoryReleaseRepoUrl
 
             credentials {
