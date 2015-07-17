@@ -10,12 +10,12 @@ publishing {
     publications {
         War(MavenPublication) {
             from components.web
-            artifactId 'cooperativa'
+            artifactId 'iso3166'
 
             pom.withXml {
                 def root = asNode()
-                root.appendNode('name', 'Cooperativa')
-                root.appendNode('description', 'Cooperativa War.')
+                root.appendNode('name', 'iso3166')
+                root.appendNode('description', 'iso3166 war.')
             }
         }
     }
