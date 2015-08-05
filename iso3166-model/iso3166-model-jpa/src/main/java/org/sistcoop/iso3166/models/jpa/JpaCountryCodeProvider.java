@@ -24,7 +24,7 @@ import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 @Stateless
 @Local(CountryCodeProvider.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class JpaCountryCodeProvider extends AbstractJpaStorage implements CountryCodeProvider {
+public class JpaCountryCodeProvider extends AbstractHibernateStorage implements CountryCodeProvider {
 
     @PersistenceContext
     private EntityManager em;
@@ -145,7 +145,7 @@ public class JpaCountryCodeProvider extends AbstractJpaStorage implements Countr
 
     @Override
     public SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria, String filterText) {
-        SearchResultsModel<CountryCodeEntity> entityResult = find(criteria, CountryCodeEntity.class,
+        SearchResultsModel<CountryCodeEntity> entityResult = findFullText(criteria, CountryCodeEntity.class,
                 filterText, filterProvider.getAlpha2CodeFilter(), filterProvider.getAlpha3CodeFilter(),
                 filterProvider.getNumericCodeFilter(), filterProvider.getShortNameEn(),
                 filterProvider.getShortNameUppercaseEn(), filterProvider.getFullNameEn());
