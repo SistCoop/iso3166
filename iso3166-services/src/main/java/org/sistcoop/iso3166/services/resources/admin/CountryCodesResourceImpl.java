@@ -54,12 +54,34 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     }
 
     @Override
-    public SearchResultsRepresentation<CountryCodeRepresentation> search() {
-        SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
-        searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
+    public SearchResultsRepresentation<CountryCodeRepresentation> search(String filterText, Integer page,
+            Integer pageSize) {
 
-        // search
-        SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search(searchCriteriaBean);
+        SearchResultsModel<CountryCodeModel> results = null;
+        if (filterText == null && page == null && pageSize == null) {
+            results = countryCodeProvider.search();
+        } else {
+            if (filterText == null) {
+                filterText = "";
+            }
+            if (page == null) {
+                page = 1;
+            }
+            if (pageSize == null) {
+                pageSize = 20;
+            }
+
+            PagingModel paging = new PagingModel();
+            paging.setPage(page);
+            paging.setPageSize(pageSize);
+
+            SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
+            searchCriteriaBean.setPaging(paging);
+            searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
+
+            results = countryCodeProvider.search(searchCriteriaBean, filterText);
+        }
+
         SearchResultsRepresentation<CountryCodeRepresentation> rep = new SearchResultsRepresentation<>();
         List<CountryCodeRepresentation> representations = new ArrayList<>();
         for (CountryCodeModel model : results.getModels()) {
@@ -69,30 +91,4 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
         rep.setItems(representations);
         return rep;
     }
-
-    @Override
-    public SearchResultsRepresentation<CountryCodeRepresentation> search(String filterText, int page,
-            int pageSize) {
-
-        PagingModel paging = new PagingModel();
-        paging.setPage(page);
-        paging.setPageSize(pageSize);
-
-        SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
-        searchCriteriaBean.setPaging(paging);
-        searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
-
-        // search
-        SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search(searchCriteriaBean,
-                filterText);
-        SearchResultsRepresentation<CountryCodeRepresentation> rep = new SearchResultsRepresentation<>();
-        List<CountryCodeRepresentation> representations = new ArrayList<>();
-        for (CountryCodeModel model : results.getModels()) {
-            representations.add(ModelToRepresentation.toRepresentation(model));
-        }
-        rep.setTotalSize(results.getTotalSize());
-        rep.setItems(representations);
-        return rep;
-    }
-
 }
