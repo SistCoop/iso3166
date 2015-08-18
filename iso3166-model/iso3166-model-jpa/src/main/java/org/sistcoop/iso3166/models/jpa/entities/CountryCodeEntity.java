@@ -15,16 +15,10 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Cacheable
 @Entity
-@Indexed
 @Table(name = "COUNTRY_CODE")
 @NamedQueries({
         @NamedQuery(name = "CountryCodeEntity.findAll", query = "SELECT c FROM CountryCodeEntity c"),
@@ -71,7 +65,6 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 2, max = 2)
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "ALPHA2_CODE")
     public String getAlpha2Code() {
         return alpha2Code;
@@ -84,7 +77,6 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 3, max = 3)
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "ALPHA3_CODE")
     public String getAlpha3Code() {
         return alpha3Code;
@@ -97,7 +89,6 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 3, max = 3)
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "NUMERIC_CODE")
     public String getNumericCode() {
         return numericCode;
@@ -119,7 +110,6 @@ public class CountryCodeEntity implements Serializable {
     }
 
     @Size(min = 1, max = 200)
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "STATUS")
     public String isStatus() {
         return status;
@@ -132,7 +122,6 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 200)
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "SHORT_NAME_EN")
     public String getShortNameEn() {
         return shortNameEn;
@@ -145,7 +134,6 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 200)
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "SHORT_NAME_UPPERCASE_EN")
     public String getShortNameUppercaseEn() {
         return shortNameUppercaseEn;
@@ -158,7 +146,6 @@ public class CountryCodeEntity implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 200)
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "FULL_NAME_EN")
     public String getFullNameEn() {
         return fullNameEn;
