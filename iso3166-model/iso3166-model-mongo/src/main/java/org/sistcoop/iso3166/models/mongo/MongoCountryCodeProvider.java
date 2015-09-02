@@ -109,7 +109,7 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
     }
 
     @Override
-    public List<CountryCodeModel> findAll() {
+    public List<CountryCodeModel> getAll() {
         // TODO Auto-generated method stub
         return null;
     }

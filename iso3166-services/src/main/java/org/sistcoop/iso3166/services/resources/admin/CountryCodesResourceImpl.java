@@ -20,7 +20,6 @@ import org.sistcoop.iso3166.models.utils.ModelToRepresentation;
 import org.sistcoop.iso3166.models.utils.RepresentationToModel;
 import org.sistcoop.iso3166.representations.idm.CountryCodeRepresentation;
 import org.sistcoop.iso3166.representations.idm.search.SearchResultsRepresentation;
-import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 
 @Stateless
 public class CountryCodesResourceImpl implements CountryCodesResource {
@@ -37,9 +36,6 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     @Inject
     private CountryCodeResource countryCodeResource;
 
-    @Inject
-    private CountryCodeFilterProvider filterProvider;
-
     @Override
     public CountryCodeResource countryCode(String countryCode) {
         return countryCodeResource;
@@ -54,8 +50,8 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     }
 
     @Override
-    public List<CountryCodeRepresentation> findALl() {
-        List<CountryCodeModel> results = countryCodeProvider.findAll();
+    public List<CountryCodeRepresentation> getAll() {
+        List<CountryCodeModel> results = countryCodeProvider.getAll();
 
         List<CountryCodeRepresentation> representations = new ArrayList<>();
         for (CountryCodeModel model : results) {
@@ -85,7 +81,6 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
 
         SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
         searchCriteriaBean.setPaging(paging);
-        searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
 
         SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search(searchCriteriaBean,
                 filterText);

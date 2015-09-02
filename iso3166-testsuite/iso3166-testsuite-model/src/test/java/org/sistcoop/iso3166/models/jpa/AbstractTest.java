@@ -12,10 +12,8 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.runner.RunWith;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
-import org.sistcoop.iso3166.models.jpa.search.filters.JpaCountryCodeFilterProvider;
 import org.sistcoop.iso3166.models.search.SearchCriteriaFilterModel;
 import org.sistcoop.iso3166.provider.Provider;
-import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,12 +36,10 @@ public abstract class AbstractTest {
 
                 // .addPackage(TipoPersona.class.getPackage())
 
-                .addPackage(SearchCriteriaFilterModel.class.getPackage())
-                .addPackage(CountryCodeFilterProvider.class.getPackage())
+                .addPackage(SearchCriteriaFilterModel.class.getPackage())                
 
                 /** model-jpa **/
-                .addPackage(JpaCountryCodeProvider.class.getPackage())
-                .addPackage(JpaCountryCodeFilterProvider.class.getPackage())
+                .addPackage(JpaCountryCodeProvider.class.getPackage())                
                 .addPackage(CountryCodeEntity.class.getPackage())
 
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")

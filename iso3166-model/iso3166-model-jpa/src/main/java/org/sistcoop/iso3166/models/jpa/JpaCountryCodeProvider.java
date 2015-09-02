@@ -7,7 +7,6 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +17,6 @@ import org.sistcoop.iso3166.models.CountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
 import org.sistcoop.iso3166.models.search.SearchCriteriaModel;
 import org.sistcoop.iso3166.models.search.SearchResultsModel;
-import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 
 @Named
 @Stateless
@@ -28,9 +26,6 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
 
     @PersistenceContext
     private EntityManager em;
-
-    @Inject
-    private CountryCodeFilterProvider filterProvider;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -113,7 +108,7 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
     }
 
     @Override
-    public List<CountryCodeModel> findAll() {
+    public List<CountryCodeModel> getAll() {
         TypedQuery<CountryCodeEntity> query = em.createNamedQuery("CountryCodeEntity.findAll",
                 CountryCodeEntity.class);
 
@@ -143,9 +138,8 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
     @Override
     public SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria, String filterText) {
         SearchResultsModel<CountryCodeEntity> entityResult = findFullText(criteria, CountryCodeEntity.class,
-                filterText, filterProvider.getAlpha2CodeFilter(), filterProvider.getAlpha3CodeFilter(),
-                filterProvider.getNumericCodeFilter(), filterProvider.getShortNameEn(),
-                filterProvider.getShortNameUppercaseEn(), filterProvider.getFullNameEn());
+                filterText, "alpha2Code", "alpha3Code", "numericCode", "shortNameEn", "shortNameUppercaseEn",
+                "fullNameEn");
 
         SearchResultsModel<CountryCodeModel> modelResult = new SearchResultsModel<>();
         List<CountryCodeModel> list = new ArrayList<>();

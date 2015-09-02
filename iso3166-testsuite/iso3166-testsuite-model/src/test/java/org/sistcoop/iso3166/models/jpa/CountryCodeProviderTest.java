@@ -69,7 +69,7 @@ public class CountryCodeProviderTest extends AbstractTest {
         countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned", "Peru", "PERU",
                 "Republic of Peru");
 
-        List<CountryCodeModel> results = countryCodeProvider.findAll();
+        List<CountryCodeModel> results = countryCodeProvider.getAll();
         for (CountryCodeModel model : results) {
             assertThat(model, is(notNullValue()));
         }

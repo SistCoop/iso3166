@@ -15,7 +15,6 @@ import org.sistcoop.iso3166.admin.client.Config;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.jpa.JpaCountryCodeProvider;
 import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
-import org.sistcoop.iso3166.models.jpa.search.filters.JpaCountryCodeFilterProvider;
 import org.sistcoop.iso3166.models.search.SearchCriteriaFilterModel;
 import org.sistcoop.iso3166.models.utils.ModelToRepresentation;
 import org.sistcoop.iso3166.provider.Provider;
@@ -23,7 +22,6 @@ import org.sistcoop.iso3166.representations.idm.CountryCodeRepresentation;
 import org.sistcoop.iso3166.representations.idm.search.SearchResultsRepresentation;
 import org.sistcoop.iso3166.services.messages.Messages;
 import org.sistcoop.iso3166.services.resources.admin.CountryCodesResourceImpl;
-import org.sistcoop.iso3166.models.search.filters.CountryCodeFilterProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,11 +49,9 @@ public abstract class AbstractTest {
                 .addPackage(ModelToRepresentation.class.getPackage())
 
                 .addPackage(SearchCriteriaFilterModel.class.getPackage())
-                .addPackage(CountryCodeFilterProvider.class.getPackage())
 
                 /** model-jpa **/
                 .addPackage(JpaCountryCodeProvider.class.getPackage())
-                .addPackage(JpaCountryCodeFilterProvider.class.getPackage())
                 .addPackage(CountryCodeEntity.class.getPackage())
 
                 /** client */

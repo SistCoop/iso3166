@@ -24,7 +24,7 @@ public interface CountryCodeProvider extends Provider {
 
     boolean remove(CountryCodeModel countryCodeModel);
 
-    List<CountryCodeModel> findAll();
+    List<CountryCodeModel> getAll();
 
     SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria);
 

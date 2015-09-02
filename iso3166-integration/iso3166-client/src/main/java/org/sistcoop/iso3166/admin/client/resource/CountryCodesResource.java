@@ -53,7 +53,7 @@ public interface CountryCodesResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CountryCodeRepresentation> findALl();
+    public List<CountryCodeRepresentation> getAll();
 
     /**
      * Buscar CountryCode segun los parametros enviados.
