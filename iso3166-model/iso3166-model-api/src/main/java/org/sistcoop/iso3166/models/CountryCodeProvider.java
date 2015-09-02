@@ -1,5 +1,7 @@
 package org.sistcoop.iso3166.models;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import org.sistcoop.iso3166.models.search.SearchCriteriaModel;
@@ -22,7 +24,7 @@ public interface CountryCodeProvider extends Provider {
 
     boolean remove(CountryCodeModel countryCodeModel);
 
-    SearchResultsModel<CountryCodeModel> search();
+    List<CountryCodeModel> findAll();
 
     SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria);
 

@@ -54,33 +54,41 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     }
 
     @Override
-    public SearchResultsRepresentation<CountryCodeRepresentation> search(String filterText, Integer page,
-            Integer pageSize) {
+    public List<CountryCodeRepresentation> findALl() {
+        List<CountryCodeModel> results = countryCodeProvider.findAll();
 
-        SearchResultsModel<CountryCodeModel> results = null;
-        if (filterText == null && page == null && pageSize == null) {
-            results = countryCodeProvider.search();
-        } else {
-            if (filterText == null) {
-                filterText = "";
-            }
-            if (page == null) {
-                page = 1;
-            }
-            if (pageSize == null) {
-                pageSize = 20;
-            }
-
-            PagingModel paging = new PagingModel();
-            paging.setPage(page);
-            paging.setPageSize(pageSize);
-
-            SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
-            searchCriteriaBean.setPaging(paging);
-            searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
-
-            results = countryCodeProvider.search(searchCriteriaBean, filterText);
+        List<CountryCodeRepresentation> representations = new ArrayList<>();
+        for (CountryCodeModel model : results) {
+            representations.add(ModelToRepresentation.toRepresentation(model));
         }
+
+        return representations;
+    }
+
+    @Override
+    public SearchResultsRepresentation<CountryCodeRepresentation> search(String filterText, int page,
+            int pageSize) {
+
+        if (filterText == null) {
+            filterText = "";
+        }
+        if (page == 0) {
+            page = 1;
+        }
+        if (pageSize == 0) {
+            pageSize = 20;
+        }
+
+        PagingModel paging = new PagingModel();
+        paging.setPage(page);
+        paging.setPageSize(pageSize);
+
+        SearchCriteriaModel searchCriteriaBean = new SearchCriteriaModel();
+        searchCriteriaBean.setPaging(paging);
+        searchCriteriaBean.addOrder(filterProvider.getShortNameEn(), true);
+
+        SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search(searchCriteriaBean,
+                filterText);
 
         SearchResultsRepresentation<CountryCodeRepresentation> rep = new SearchResultsRepresentation<>();
         List<CountryCodeRepresentation> representations = new ArrayList<>();
@@ -89,6 +97,8 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
         }
         rep.setTotalSize(results.getTotalSize());
         rep.setItems(representations);
+
         return rep;
     }
+
 }

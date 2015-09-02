@@ -91,12 +91,6 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
     }
 
     @Override
-    public SearchResultsModel<CountryCodeModel> search() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public SearchResultsModel<CountryCodeModel> search(SearchCriteriaModel criteria) {
         // TODO Auto-generated method stub
         return null;
@@ -110,6 +104,12 @@ public class MongoCountryCodeProvider implements CountryCodeProvider {
 
     @Override
     public CountryCodeModel findById(String id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<CountryCodeModel> findAll() {
         // TODO Auto-generated method stub
         return null;
     }

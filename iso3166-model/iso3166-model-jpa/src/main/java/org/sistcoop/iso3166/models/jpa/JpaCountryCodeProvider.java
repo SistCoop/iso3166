@@ -113,7 +113,7 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
     }
 
     @Override
-    public SearchResultsModel<CountryCodeModel> search() {
+    public List<CountryCodeModel> findAll() {
         TypedQuery<CountryCodeEntity> query = em.createNamedQuery("CountryCodeEntity.findAll",
                 CountryCodeEntity.class);
 
@@ -123,10 +123,7 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
             models.add(new CountryCodeAdapter(em, countryCodeEntity));
         }
 
-        SearchResultsModel<CountryCodeModel> result = new SearchResultsModel<>();
-        result.setModels(models);
-        result.setTotalSize(models.size());
-        return result;
+        return models;
     }
 
     @Override

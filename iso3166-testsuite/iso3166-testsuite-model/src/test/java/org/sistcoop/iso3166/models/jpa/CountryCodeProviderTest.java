@@ -1,14 +1,18 @@
 package org.sistcoop.iso3166.models.jpa;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.sistcoop.iso3166.models.CountryCodeModel;
 import org.sistcoop.iso3166.models.CountryCodeProvider;
-import org.sistcoop.iso3166.models.search.SearchResultsModel;
 
 public class CountryCodeProviderTest extends AbstractTest {
 
@@ -65,13 +69,12 @@ public class CountryCodeProviderTest extends AbstractTest {
         countryCodeProvider.create("PE", "PER", "051", true, "officially-assigned", "Peru", "PERU",
                 "Republic of Peru");
 
-        SearchResultsModel<CountryCodeModel> results = countryCodeProvider.search();
-        for (CountryCodeModel model : results.getModels()) {
+        List<CountryCodeModel> results = countryCodeProvider.findAll();
+        for (CountryCodeModel model : results) {
             assertThat(model, is(notNullValue()));
         }
 
-        assertThat(results.getTotalSize(), is(1));
-        assertThat(results.getModels().size(), is(1));
+        assertThat(results.size(), is(1));
     }
 
     @Test
