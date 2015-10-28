@@ -40,7 +40,7 @@ public interface CountryCodesResource {
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(CountryCodeRepresentation representation);
+    public Response create(CountryCodeRepresentation rep);
 
     /**
      * Listar todos los country codes.
@@ -70,11 +70,32 @@ public interface CountryCodesResource {
      * @throws EJBException
      *             datos validos pero ocurrio un error interno
      */
+
     @GET
     @Path("search")
     @Produces(MediaType.APPLICATION_JSON)
     public SearchResultsRepresentation<CountryCodeRepresentation> search(
             @QueryParam("filterText") String filterText, @QueryParam("page") int page,
             @QueryParam("pageSize") int pageSize);
+
+    /**
+     * Este endpoint provee una forma de buscar bovedas. Los criterios de
+     * busqueda estan definidos por los parametros enviados.
+     * 
+     * @summary Search for Bovedas
+     * @param criteria
+     *            Criterio de busqueda.
+     * @statuscode 200 Si la busqueda fue realizada satisfactoriamente.
+     * @return Los resultados de la busqueda (una pagina de bovedas).
+     */
+    /*
+     * @POST
+     * 
+     * @Path("search")
+     * 
+     * @Produces(MediaType.APPLICATION_JSON) public
+     * SearchResultsRepresentation<CountryCodeRepresentation> search(
+     * SearchCriteriaRepresentation criteria);
+     */
 
 }
