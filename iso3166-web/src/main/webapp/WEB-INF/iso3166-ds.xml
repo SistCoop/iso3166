@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
-	<datasource jndi-name="java:jboss/datasources/Iso3166DS" pool-name="Iso3166DS" enabled="true" use-java-context="true">
-		<connection-url>jdbc:postgresql://localhost:5432/iso3166</connection-url>
-		<driver>postgresql</driver>
+	<datasource jndi-name="java:jboss/datasources/Iso3166DS"
+		pool-name="Iso3166DS" enabled="true" use-java-context="true">
+		<connection-url>jdbc:h2:mem:iso3166;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+		</connection-url>
+		<driver>h2</driver>
 		<security>
-			<user-name>postgres</user-name>
-			<password>123456</password>
+			<user-name>sa</user-name>
+			<password>sa</password>
 		</security>
 	</datasource>
 </datasources>
