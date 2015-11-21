@@ -8,7 +8,16 @@ task copyModelJpaConfiguration(type: Copy) {
     into project(":$projectName-model:$projectName-model-jpa").file("src/main/resources")
 }
 
-task copyConfiguration(dependsOn: [copyWebConfiguration, copyModelJpaConfiguration])
+task copyTestsuiteClientConfiguration(type: Copy) {
+    from "$rootDir/enviroment/$env/testsuite"
+    into project(":$projectName-testsuite:$projectName-testsuite-client").file("src/test/resources")
+}
+task copyTestsuiteModelConfiguration(type: Copy) {
+    from "$rootDir/enviroment/$env/testsuite"
+    into project(":$projectName-testsuite:$projectName-testsuite-model").file("src/test/resources")
+}
+
+task copyConfiguration(dependsOn: [copyWebConfiguration, copyModelJpaConfiguration, copyTestsuiteModelConfiguration, copyTestsuiteClientConfiguration])
 
 assemble.dependsOn copyConfiguration
 test.dependsOn copyConfiguration
