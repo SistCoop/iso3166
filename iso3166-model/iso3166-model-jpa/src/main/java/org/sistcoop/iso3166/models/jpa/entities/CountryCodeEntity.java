@@ -34,21 +34,13 @@ public class CountryCodeEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
-
     private String alpha2Code;
-
     private String alpha3Code;
-
     private String numericCode;
-
     private boolean independent;
-
     private String status;
-
     private String shortNameEn;
-
     private String shortNameUppercaseEn;
-
     private String fullNameEn;
 
     public CountryCodeEntity() {
@@ -164,9 +156,7 @@ public class CountryCodeEntity implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((alpha2Code == null) ? 0 : alpha2Code.hashCode());
-        result = prime * result + ((alpha3Code == null) ? 0 : alpha3Code.hashCode());
-        result = prime * result + ((numericCode == null) ? 0 : numericCode.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -179,20 +169,10 @@ public class CountryCodeEntity implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         CountryCodeEntity other = (CountryCodeEntity) obj;
-        if (alpha2Code == null) {
-            if (other.alpha2Code != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!alpha2Code.equals(other.alpha2Code))
-            return false;
-        if (alpha3Code == null) {
-            if (other.alpha3Code != null)
-                return false;
-        } else if (!alpha3Code.equals(other.alpha3Code))
-            return false;
-        if (numericCode == null) {
-            if (other.numericCode != null)
-                return false;
-        } else if (!numericCode.equals(other.numericCode))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }

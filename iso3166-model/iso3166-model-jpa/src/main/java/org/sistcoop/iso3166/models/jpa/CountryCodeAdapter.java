@@ -110,9 +110,7 @@ public class CountryCodeAdapter implements CountryCodeModel {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getAlpha2Code() == null) ? 0 : getAlpha2Code().hashCode());
-        result = prime * result + ((getAlpha3Code() == null) ? 0 : getAlpha3Code().hashCode());
-        result = prime * result + ((getNumericCode() == null) ? 0 : getNumericCode().hashCode());
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         return result;
     }
 
@@ -122,24 +120,13 @@ public class CountryCodeAdapter implements CountryCodeModel {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof CountryCodeModel))
+        if (getClass() != obj.getClass())
             return false;
-
         CountryCodeModel other = (CountryCodeModel) obj;
-        if (getAlpha2Code() == null) {
-            if (other.getAlpha2Code() != null)
+        if (getId() == null) {
+            if (other.getId() != null)
                 return false;
-        } else if (!getAlpha2Code().equals(other.getAlpha2Code()))
-            return false;
-        if (getAlpha3Code() == null) {
-            if (other.getAlpha3Code() != null)
-                return false;
-        } else if (!getAlpha3Code().equals(other.getAlpha3Code()))
-            return false;
-        if (getNumericCode() == null) {
-            if (other.getNumericCode() != null)
-                return false;
-        } else if (!getNumericCode().equals(other.getNumericCode()))
+        } else if (!getId().equals(other.getId()))
             return false;
         return true;
     }
