@@ -30,7 +30,7 @@ public class SearchResultsRepresentation<T> implements Serializable {
 
     private static final long serialVersionUID = 7557720618049390833L;
 
-    private List<T> items = new ArrayList<>();
+    private transient List<T> items = new ArrayList<>();
     private int totalSize;
 
     /**

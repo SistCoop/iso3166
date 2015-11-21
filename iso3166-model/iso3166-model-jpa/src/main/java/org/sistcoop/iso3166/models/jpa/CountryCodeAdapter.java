@@ -8,12 +8,12 @@ import org.sistcoop.iso3166.models.jpa.entities.CountryCodeEntity;
 public class CountryCodeAdapter implements CountryCodeModel {
 
     /**
-	 * 
-	 */
+     * 
+     */
     private static final long serialVersionUID = 1L;
 
     private CountryCodeEntity countryCodeEntity;
-    private EntityManager em;
+    private transient EntityManager em;
 
     public CountryCodeAdapter(EntityManager em, CountryCodeEntity countryCodeEntity) {
         this.em = em;

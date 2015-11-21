@@ -20,8 +20,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Cacheable
 @Entity
 @Table(name = "COUNTRY_CODE")
-@NamedQueries({
-        @NamedQuery(name = "CountryCodeEntity.findAll", query = "SELECT c FROM CountryCodeEntity c"),
+@NamedQueries({ @NamedQuery(name = "CountryCodeEntity.findAll", query = "SELECT c FROM CountryCodeEntity c"),
         @NamedQuery(name = "CountryCodeEntity.findByAlpha2Code", query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha2Code = :alpha2Code"),
         @NamedQuery(name = "CountryCodeEntity.findByAlpha3Code", query = "SELECT c FROM CountryCodeEntity c WHERE c.alpha3Code = :alpha3Code"),
         @NamedQuery(name = "CountryCodeEntity.findByNumericCode", query = "SELECT c FROM CountryCodeEntity c WHERE c.numericCode = :numericCode"),
@@ -30,20 +29,26 @@ import org.hibernate.validator.constraints.NotBlank;
 public class CountryCodeEntity implements Serializable {
 
     /**
-	 * 
-	 */
+     * 
+     */
     private static final long serialVersionUID = 1L;
 
     private String id;
+
     private String alpha2Code;
+
     private String alpha3Code;
+
     private String numericCode;
 
     private boolean independent;
+
     private String status;
 
     private String shortNameEn;
+
     private String shortNameUppercaseEn;
+
     private String fullNameEn;
 
     public CountryCodeEntity() {

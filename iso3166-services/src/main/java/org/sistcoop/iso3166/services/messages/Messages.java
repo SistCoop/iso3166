@@ -26,14 +26,13 @@ package org.sistcoop.iso3166.services.messages;
  */
 public class Messages {
 
+    private Messages() {
+        
+    }
+
     public static final String ACCOUNT_DISABLED = "accountDisabled";
+
     public static final String ACCOUNT_TEMPORARILY_DISABLED = "accountTemporarilyDisabled";
-
-    public static final String INVALID_PASSWORD = "invalidPassword";
-
-    public static final String INVALID_PASSWORD_EXISTING = "invalidPasswordExisting";
-
-    public static final String INVALID_PASSWORD_CONFIRM = "invalidPasswordConfirm";
 
     public static final String INVALID_EMAIL = "invalidEmail";
 
@@ -43,17 +42,11 @@ public class Messages {
 
     public static final String READ_ONLY_USER = "readOnlyUser";
 
-    public static final String READ_ONLY_PASSWORD = "readOnlyPassword";
-
     public static final String MISSING_EMAIL = "missingEmail";
 
     public static final String MISSING_FIRST_NAME = "missingFirstName";
 
     public static final String MISSING_LAST_NAME = "missingLastName";
-
-    public static final String MISSING_PASSWORD = "missingPassword";
-
-    public static final String NOTMATCH_PASSWORD = "notMatchPassword";
 
     public static final String MISSING_USERNAME = "missingUsername";
 
@@ -68,8 +61,6 @@ public class Messages {
     public static final String ACTION_WARN_TOTP = "actionTotpWarning";
 
     public static final String ACTION_WARN_PROFILE = "actionProfileWarning";
-
-    public static final String ACTION_WARN_PASSWD = "actionPasswordWarning";
 
     public static final String ACTION_WARN_EMAIL = "actionEmailWarning";
 

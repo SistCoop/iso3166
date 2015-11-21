@@ -1,4 +1,4 @@
 dependencies {
-    compile project(':iso3166-integration:iso3166-client')
-	compile project(':iso3166-services')
+    compile project(":$projectName-integration:$projectName-client")
+	compile project(":$projectName-services")
 }

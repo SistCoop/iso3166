@@ -77,7 +77,7 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
                 CountryCodeEntity.class);
         query.setParameter("alpha2Code", alpha2Code);
         List<CountryCodeEntity> results = query.getResultList();
-        if (results.size() == 0) {
+        if (results.isEmpty()) {
             return null;
         }
         return new CountryCodeAdapter(em, results.get(0));
@@ -89,7 +89,7 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
                 CountryCodeEntity.class);
         query.setParameter("alpha3Code", alpha3Code);
         List<CountryCodeEntity> results = query.getResultList();
-        if (results.size() == 0) {
+        if (results.isEmpty()) {
             return null;
         }
         return new CountryCodeAdapter(em, results.get(0));
@@ -101,7 +101,7 @@ public class JpaCountryCodeProvider extends AbstractHibernateStorage implements 
                 CountryCodeEntity.class);
         query.setParameter("numericCode", numericCode);
         List<CountryCodeEntity> results = query.getResultList();
-        if (results.size() == 0) {
+        if (results.isEmpty()) {
             return null;
         }
         return new CountryCodeAdapter(em, results.get(0));

@@ -30,7 +30,7 @@ public class SearchResultsModel<T> implements Serializable {
 
     private static final long serialVersionUID = -1672829715471947181L;
 
-    private List<T> models = new ArrayList<>();
+    private transient List<T> models = new ArrayList<>();
     private int totalSize;
 
     /**

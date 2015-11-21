@@ -64,9 +64,8 @@ public class CountryCodesResourceImpl implements CountryCodesResource {
     @Override
     public SearchResultsRepresentation<CountryCodeRepresentation> search(String filterText, int page,
             int pageSize) {
-
         if (filterText == null) {
-            filterText = "";
+            filterText = new String();
         }
         if (page == 0) {
             page = 1;

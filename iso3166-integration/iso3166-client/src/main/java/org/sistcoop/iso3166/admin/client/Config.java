@@ -5,4 +5,10 @@ package org.sistcoop.iso3166.admin.client;
  */
 public class Config {
 
+    public final static String name = "name";
+
+    private Config() {
+
+    }
+
 }

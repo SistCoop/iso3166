@@ -8,12 +8,12 @@ import org.sistcoop.iso3166.models.mongo.entities.CountryCodeEntity;
 public class CountryCodeAdapter implements CountryCodeModel {
 
     /**
-	 * 
-	 */
+     * 
+     */
     private static final long serialVersionUID = 1L;
 
-    protected CountryCodeEntity countryCodeEntity;
-    protected EntityManager em;
+    private CountryCodeEntity countryCodeEntity;
+    private transient EntityManager em;
 
     public CountryCodeAdapter(EntityManager em, CountryCodeEntity countryCodeEntity) {
         this.em = em;

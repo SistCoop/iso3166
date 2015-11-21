@@ -78,24 +78,4 @@ public interface CountryCodesResource {
             @QueryParam("filterText") String filterText, @QueryParam("page") int page,
             @QueryParam("pageSize") int pageSize);
 
-    /**
-     * Este endpoint provee una forma de buscar bovedas. Los criterios de
-     * busqueda estan definidos por los parametros enviados.
-     * 
-     * @summary Search for Bovedas
-     * @param criteria
-     *            Criterio de busqueda.
-     * @statuscode 200 Si la busqueda fue realizada satisfactoriamente.
-     * @return Los resultados de la busqueda (una pagina de bovedas).
-     */
-    /*
-     * @POST
-     * 
-     * @Path("search")
-     * 
-     * @Produces(MediaType.APPLICATION_JSON) public
-     * SearchResultsRepresentation<CountryCodeRepresentation> search(
-     * SearchCriteriaRepresentation criteria);
-     */
-
 }
