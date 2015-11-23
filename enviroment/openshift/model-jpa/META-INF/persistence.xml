@@ -6,7 +6,7 @@
 	<!-- OPENSHIFT ENVIROMENT -->
 
 	<persistence-unit name="Iso3166PU">
-		<jta-data-source>java:jboss/datasources/PostgreSQLDS</jta-data-source>
+		<jta-data-source>java:jboss/datasources/Iso3166DS</jta-data-source>
 		<shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
 		<properties>
 			<!-- Properties for Hibernate -->
